@@ -187,11 +187,142 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <li><code>netsh wlan show profiles</code></li>
 <li><code>netsh wlan show profile name=“网络链接配置文件” key=clear</code> –查看wifi密码</li>
 <li><code>ls /etc/NetworkManager/system-connections</code></li>
-<li><code>cat /etc/NetworkManager/system-connections/wifi配置文件</code><h5 id="域信息收集"><a href="#域信息收集" class="headerlink" title="域信息收集"></a>域信息收集</h5>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Net use</span><br><span class="line">Net view</span><br><span class="line">Tasklist &#x2F;v</span><br><span class="line">Ipconfig &#x2F;all </span><br><span class="line">net group &#x2F;domain 获得所有域用户组列表</span><br><span class="line">net group “domain admins” &#x2F;domain 获得域管理员列表</span><br><span class="line">net group “enterprise admins” &#x2F;domain 获得企业管理员列表</span><br><span class="line">net localgroup administrators &#x2F;domain 获取域内置administrators组用户（enterprise admins、domain admins）</span><br><span class="line">net group “domain controllers” &#x2F;domain 获得域控制器列表</span><br><span class="line">net group “domain computers” &#x2F;domain 获得所有域成员计算机列表</span><br><span class="line">net user &#x2F;domain 获得所有域用户列表</span><br><span class="line">net user someuser &#x2F;domain 获得指定账户someuser的详细信息</span><br><span class="line">net accounts &#x2F;domain 获得域密码策略设置，密码长短，错误锁定等信息</span><br><span class="line">nltest &#x2F;domain_trusts 获取域信任信息</span><br></pre></td></tr></table></figure>
+<li><code>cat /etc/NetworkManager/system-connections/wifi配置文件</code><h5 id="域信息收集"><a href="#域信息收集" class="headerlink" title="域信息收集"></a>域信息收集</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Net use</span><br><span class="line">Net view</span><br><span class="line">Tasklist &#x2F;v</span><br><span class="line">Ipconfig &#x2F;all </span><br><span class="line">net group &#x2F;domain 获得所有域用户组列表</span><br><span class="line">net group “domain admins” &#x2F;domain 获得域管理员列表</span><br><span class="line">net group “enterprise admins” &#x2F;domain 获得企业管理员列表</span><br><span class="line">net localgroup administrators &#x2F;domain 获取域内置administrators组用户（enterprise admins、domain admins）</span><br><span class="line">net group “domain controllers” &#x2F;domain 获得域控制器列表</span><br><span class="line">net group “domain computers” &#x2F;domain 获得所有域成员计算机列表</span><br><span class="line">net user &#x2F;domain 获得所有域用户列表</span><br><span class="line">net user someuser &#x2F;domain 获得指定账户someuser的详细信息</span><br><span class="line">net accounts &#x2F;domain 获得域密码策略设置，密码长短，错误锁定等信息</span><br><span class="line">nltest &#x2F;domain_trusts 获取域信任信息</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h4 id="4-1-2-脚本-工具收集"><a href="#4-1-2-脚本-工具收集" class="headerlink" title="4.1.2 脚本/工具收集"></a>4.1.2 脚本/工具收集</h4><h5 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h5><h5 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h5><h3 id="4-2-漏洞验证-漏洞攻击"><a href="#4-2-漏洞验证-漏洞攻击" class="headerlink" title="4.2. 漏洞验证/漏洞攻击"></a>4.2. 漏洞验证/漏洞攻击</h3><h3 id="4-3-后渗透"><a href="#4-3-后渗透" class="headerlink" title="4.3. 后渗透"></a>4.3. 后渗透</h3><h3 id="4-4-日志清理"><a href="#4-4-日志清理" class="headerlink" title="4.4. 日志清理"></a>4.4. 日志清理</h3>
+<h4 id="4-1-2-脚本-工具收集"><a href="#4-1-2-脚本-工具收集" class="headerlink" title="4.1.2 脚本/工具收集"></a>4.1.2 脚本/工具收集</h4><p>wmic脚本（windows）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for &#x2F;f &quot;delims&#x3D;&quot; %%A in (&#39;dir &#x2F;s &#x2F;b %WINDIR%\system32\*htable.xsl&#39;) do set &quot;var&#x3D;%%A&quot;</span><br><span class="line"></span><br><span class="line">wmic process get CSName,Description,ExecutablePath,ProcessId &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic service get Caption,Name,PathName,ServiceType,Started,StartMode,StartName &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic USERACCOUNT list full &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic group list full &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic nicconfig where IPEnabled&#x3D;&#39;true&#39; get Caption,DefaultIPGateway,Description,DHCPEnabled,DHCPServer,IPAddress,IPSubnet,MACAddress &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic volume get Label,DeviceID,DriveLetter,FileSystem,Capacity,FreeSpace &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic netuse list full &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic startup get Caption,Command,Location,User &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic PRODUCT get Description,InstallDate,InstallLocation,PackageCache,Vendor,Version &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic os get name,version,InstallDate,LastBootUpTime,LocalDateTime,Manufacturer,RegisteredUser,ServicePackMajorVersion,SystemDirectory &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br><span class="line">wmic Timezone get DaylightName,Description,StandardName &#x2F;format:&quot;%var%&quot; &gt;&gt; out.html</span><br></pre></td></tr></table></figure>
+<p>在当前目录下输出out.html文件，输出信息探测内容</p>
+<h5 id="网络环境判断"><a href="#网络环境判断" class="headerlink" title="网络环境判断"></a>网络环境判断</h5><ul>
+<li>判断计算机所在位置的区域</li>
+<li>判断计算机在内网中的角色</li>
+</ul>
+<h5 id="主机发现（可能会禁ping）"><a href="#主机发现（可能会禁ping）" class="headerlink" title="主机发现（可能会禁ping）"></a>主机发现（可能会禁ping）</h5><ul>
+<li><p>Linux下</p>
+<ul>
+<li>使用工具<code>namp -sP 内网网段</code>，<code>netdiscover -r 网段 -i 网卡</code>(使用跳板代理)</li>
+<li>编写sh脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">###############################</span><br><span class="line">##for循环ping文本中的IP</span><br><span class="line">##</span><br><span class="line">##############################</span><br><span class="line">#设置变量</span><br><span class="line">list&#x3D;&#96;cat $(pwd)&#x2F;ip.txt&#96;</span><br><span class="line">#for循环遍历文本中的内容</span><br><span class="line">for ip in $list</span><br><span class="line">do</span><br><span class="line">#ping一次，超时时间1秒 混合输出导入到&#x2F;dev&#x2F;null，不需要看过程</span><br><span class="line">    ping -c 1 -W1  $ip &gt;&#x2F;dev&#x2F;null 2&gt;1</span><br><span class="line">#ping成功的返回码为0,echo一个up，ping失败则echodown</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">    echo &quot;$ip is up....&quot;</span><br><span class="line">    else </span><br><span class="line">    echo &quot;$ip is down....&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>windows下</p>
+<ul>
+<li>使用工具<code>nbtscan.exe -n 网段</code>（跳板代理）</li>
+<li>编写bat脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set &#x2F;p ip&#x3D;&quot;set ip net,the format:&quot;10.10.10.&quot; &gt;&gt;&gt; &quot;</span><br><span class="line">for &#x2F;L %%i in (1,1,254) do (</span><br><span class="line">ping.exe -n 1 -w 10 %ip%%%i | findstr &quot;TTL&quot; &gt;&gt; ipscan.txt</span><br><span class="line">)</span><br><span class="line">type ipscan.txt</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h5><ul>
+<li>windows下Powershell脚本（windows下后缀名为.sp1）<ul>
+<li>powershell执行策略：默认情况下，脚本无法执行。需要手动更改 Set-ExecutionPolicy RemoteSigned</li>
+<li><code>.\IPv4PortScan.ps1 -ComputerName fritz.box -EndPort 500</code>,<a href="https://github.com/BornToBeRoot/PowerShell_IPv4PortScanner/blob/master/Scripts/IPv4PortScan.ps1" target="_blank" rel="noopener">脚本github地址</a></li>
+</ul>
+</li>
+<li>跳板代理后使用nmap扫描</li>
+</ul>
+<h3 id="4-2-漏洞验证-漏洞攻击"><a href="#4-2-漏洞验证-漏洞攻击" class="headerlink" title="4.2. 漏洞验证/漏洞攻击"></a>4.2. 漏洞验证/漏洞攻击</h3><h4 id="4-2-1-web常见漏洞"><a href="#4-2-1-web常见漏洞" class="headerlink" title="4.2.1 web常见漏洞"></a>4.2.1 web常见漏洞</h4><ul>
+<li>基础知识</li>
+</ul>
+<h4 id="4-2-2-中间件漏洞"><a href="#4-2-2-中间件漏洞" class="headerlink" title="4.2.2. 中间件漏洞"></a>4.2.2. 中间件漏洞</h4><ul>
+<li>可在线检索学习</li>
+<li><a href="https://www.freebuf.com/articles/web/192063.html" target="_blank" rel="noopener">参考</a></li>
+</ul>
+<h4 id="4-2-3-web框架"><a href="#4-2-3-web框架" class="headerlink" title="4.2.3. web框架"></a>4.2.3. web框架</h4><ul>
+<li>struts2远程代码执行</li>
+<li>ThinkPHP任意代码执行</li>
+<li>等等在线检索学习</li>
+</ul>
+<h4 id="4-2-4-数据库"><a href="#4-2-4-数据库" class="headerlink" title="4.2.4. 数据库"></a>4.2.4. 数据库</h4><ul>
+<li>MYSQL数据库<ul>
+<li>端口3306</li>
+<li>攻击方式：<ul>
+<li>弱口令爆破</li>
+<li>身份认证漏洞：CVE-2012-2122</li>
+<li>拒绝服务攻击</li>
+<li>phpmyadmin万能密码绕过，用户名：‘localhost’@‘@” 密码任意</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MSSQL数据库<ul>
+<li>端口1433（Server数据库服务）、1434（monitor数据库监控）</li>
+<li>攻击方式：<ul>
+<li>弱口令爆破</li>
+<li>远程代码执行：CVE-2018-8273</li>
+<li><a href="https://www.anquanke.com/post/id/86011" target="_blank" rel="noopener">参考</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Oracle数据库<ul>
+<li>默认端口：1521（数据库端口）、1158（Oracle EMCTL端口）、8080（Oracle XDB数据库）、210（Oracle XDB FTP服务）</li>
+<li>攻击方法：<ul>
+<li>爆破：弱口令</li>
+<li>注入攻击；</li>
+<li><a href="https://www.leiphone.com/news/201711/JjzXFp46zEPMvJod.html" target="_blank" rel="noopener">参考</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-2-5-常见服务-协议"><a href="#4-2-5-常见服务-协议" class="headerlink" title="4.2.5. 常见服务/协议"></a>4.2.5. 常见服务/协议</h4><ul>
+<li><p>ftp服务</p>
+<ul>
+<li>分为两种：一种是使用软件（iis）配置，一种是第三方软件（serv-u）配置</li>
+<li>默认端口：20（数据端口），21（控制端口）；69（tftp小型文件传输协议）</li>
+<li>攻击方式：<ul>
+<li>爆破：<ul>
+<li>hydra：<code>hydra -l username -P password.txt ftp://ip</code></li>
+<li>msf爆破模块：<code>msf-&gt;search ftp_login-&gt;use -&gt;show options-&gt; set -&gt;exploit</code></li>
+</ul>
+</li>
+<li>匿名访问</li>
+<li>后门vfstp</li>
+<li>ftp远程代码溢出</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>samba服务</p>
+<ul>
+<li>端口为139</li>
+<li>攻击方式：远程代码执行<ul>
+<li>msf：版本探测<code>msf-&gt;search smb_version-&gt;use -&gt;show options-&gt;set -&gt;exploit</code>,版本漏洞查询<code>searchsploit smb version</code>,找到漏洞利用文件（.c），编译<code>gcc -o smb-exp 漏洞利用源码</code>，<code>chmod +x smb-exp</code>执行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ssh服务</p>
+<ul>
+<li>端口22</li>
+<li>攻击方式<ul>
+<li>爆破</li>
+<li>28退格漏洞</li>
+<li>OpenSSL（C语言函数库，对ssl协议的实现）漏洞，使用<code>searchsploit</code>查询漏洞利用代码,与smb利用类似</li>
+<li>openssh（对ssh协议的实现，其中openssh依赖于openssl）用户枚举</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>rdp远程桌面（windows）</p>
+<ul>
+<li>端口3389</li>
+<li>开启3389（拿到webshell后的提权之路）：<ul>
+<li>.exe工具</li>
+<li>.vbs脚本</li>
+<li>.bat脚本</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-2-5-常见的web应用系统漏洞"><a href="#4-2-5-常见的web应用系统漏洞" class="headerlink" title="4.2.5. 常见的web应用系统漏洞"></a>4.2.5. 常见的web应用系统漏洞</h4><ul>
+<li>cms应用漏洞(在线检索以及学习积累)</li>
+</ul>
+<h3 id="4-3-后渗透"><a href="#4-3-后渗透" class="headerlink" title="4.3. 后渗透"></a>4.3. 后渗透</h3><h3 id="4-4-日志清理"><a href="#4-4-日志清理" class="headerlink" title="4.4. 日志清理"></a>4.4. 日志清理</h3>
       
       <!-- reward -->
       
@@ -472,7 +603,7 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <script>
   try {
     var typed = new Typed("#subtitle", {
-      strings: ['面朝大海，春暖花开.', '春赏百花冬观雪,醒亦念卿,梦亦念卿.', '浮世三千,吾爱有三;日|月|卿;日为朝,月为暮,卿为朝朝暮暮.'],
+      strings: ['面朝大海,春暖花开.', '春赏百花冬观雪,醒亦念卿,梦亦念卿.', '浮世三千,吾爱有三;日|月|卿;日为朝,月为暮,卿为朝朝暮暮.'],
       startDelay: 0,
       typeSpeed: 200,
       loop: true,
