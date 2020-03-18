@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.4k字</span>
+            <span class="post-count">2.9k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">10分钟</span>
+            <span class="post-count">12分钟</span>
         </span>
     </span>
 </div>
@@ -193,14 +193,14 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <li><p>Linux下</p>
 <ul>
 <li>使用工具<code>namp -sP 内网网段</code>，<code>netdiscover -r 网段 -i 网卡</code>(使用跳板代理)</li>
-<li>编写sh脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">###############################</span><br><span class="line">##for循环ping文本中的IP</span><br><span class="line">##</span><br><span class="line">##############################</span><br><span class="line">#设置变量</span><br><span class="line">list&#x3D;&#96;cat $(pwd)&#x2F;ip.txt&#96;</span><br><span class="line">#for循环遍历文本中的内容</span><br><span class="line">for ip in $list</span><br><span class="line">do</span><br><span class="line">#ping一次，超时时间1秒 混合输出导入到&#x2F;dev&#x2F;null，不需要看过程</span><br><span class="line">    ping -c 1 -W1  $ip &gt;&#x2F;dev&#x2F;null 2&gt;1</span><br><span class="line">#ping成功的返回码为0,echo一个up，ping失败则echodown</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">    echo &quot;$ip is up....&quot;</span><br><span class="line">    else </span><br><span class="line">    echo &quot;$ip is down....&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<li>编写sh脚本<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">###############################</span></span><br><span class="line"><span class="comment">##for循环ping文本中的IP</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment">##############################</span></span><br><span class="line"><span class="comment">#设置变量</span></span><br><span class="line">list=`cat $(<span class="built_in">pwd</span>)/ip.txt`</span><br><span class="line"><span class="comment">#for循环遍历文本中的内容</span></span><br><span class="line"><span class="keyword">for</span> ip <span class="keyword">in</span> <span class="variable">$list</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="comment">#ping一次，超时时间1秒 混合输出导入到/dev/null，不需要看过程</span></span><br><span class="line">    ping -c 1 -W1  <span class="variable">$ip</span> &gt;/dev/null 2&gt;1</span><br><span class="line"><span class="comment">#ping成功的返回码为0,echo一个up，ping失败则echodown</span></span><br><span class="line">    <span class="keyword">if</span> [ $? -eq 0 ];<span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$ip</span> is up...."</span></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$ip</span> is down...."</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>windows下</p>
 <ul>
 <li>使用工具<code>nbtscan.exe -n 网段</code>（跳板代理）</li>
-<li>编写bat脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set &#x2F;p ip&#x3D;&quot;set ip net,the format:&quot;10.10.10.&quot; &gt;&gt;&gt; &quot;</span><br><span class="line">for &#x2F;L %%i in (1,1,254) do (</span><br><span class="line">ping.exe -n 1 -w 10 %ip%%%i | findstr &quot;TTL&quot; &gt;&gt; ipscan.txt</span><br><span class="line">)</span><br><span class="line">type ipscan.txt</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<li>编写bat脚本<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">set</span> /p ip="<span class="built_in">set</span> ip <span class="built_in">net</span>,the <span class="built_in">format</span>:"<span class="number">10</span>.<span class="number">10</span>.<span class="number">10</span>." &gt;&gt;&gt; "</span><br><span class="line"><span class="keyword">for</span> /L <span class="variable">%%i</span> <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">1</span>,<span class="number">254</span>) <span class="keyword">do</span> (</span><br><span class="line"><span class="built_in">ping</span>.exe -n <span class="number">1</span> -w <span class="number">10</span> <span class="variable">%ip%</span><span class="variable">%%i</span> | <span class="built_in">findstr</span> "TTL" &gt;&gt; ipscan.txt</span><br><span class="line">)</span><br><span class="line"><span class="built_in">type</span> ipscan.txt</span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -212,7 +212,7 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <li><code>.\IPv4PortScan.ps1 -ComputerName fritz.box -EndPort 500</code>,<a href="https://github.com/BornToBeRoot/PowerShell_IPv4PortScanner/blob/master/Scripts/IPv4PortScan.ps1" target="_blank" rel="noopener">脚本github地址</a></li>
 </ul>
 </li>
-<li>跳板代理后使用nmap扫描</li>
+<li>跳板代理后使用nmap扫描(4.3后渗透部分)</li>
 </ul>
 <h3 id="4-2-漏洞验证-漏洞攻击"><a href="#4-2-漏洞验证-漏洞攻击" class="headerlink" title="4.2. 漏洞验证/漏洞攻击"></a>4.2. 漏洞验证/漏洞攻击</h3><h4 id="4-2-1-web常见漏洞"><a href="#4-2-1-web常见漏洞" class="headerlink" title="4.2.1 web常见漏洞"></a>4.2.1 web常见漏洞</h4><ul>
 <li>基础知识</li>
@@ -313,7 +313,52 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <h4 id="4-2-5-常见的web应用系统漏洞"><a href="#4-2-5-常见的web应用系统漏洞" class="headerlink" title="4.2.5. 常见的web应用系统漏洞"></a>4.2.5. 常见的web应用系统漏洞</h4><ul>
 <li>cms应用漏洞(在线检索以及学习积累)</li>
 </ul>
-<h3 id="4-3-后渗透"><a href="#4-3-后渗透" class="headerlink" title="4.3. 后渗透"></a>4.3. 后渗透</h3><h3 id="4-4-日志清理"><a href="#4-4-日志清理" class="headerlink" title="4.4. 日志清理"></a>4.4. 日志清理</h3>
+<h3 id="4-3-后渗透"><a href="#4-3-后渗透" class="headerlink" title="4.3. 后渗透"></a>4.3. 后渗透</h3><p>应用场景：外网主机A（攻击者）,内网主机B（拿下权限的跳板）,内网主机C（目标主机），A可访问B,A不可访问C。</p>
+<h4 id="4-3-1-端口转发（跳板）"><a href="#4-3-1-端口转发（跳板）" class="headerlink" title="4.3.1. 端口转发（跳板）"></a>4.3.1. 端口转发（跳板）</h4><ul>
+<li>端口映射：将内网主机开放的内部端口映射到外网主机（有公网IP的主机）任意端口，提供相应的服务。</li>
+<li>端口转发：通过端口从一个网络节点转发到另一个网络节点，通常是把内网的端口转发到外网的主机，搭建隧道，即能实现从外网访问内网资源。</li>
+</ul>
+<hr>
+<ul>
+<li>lcx工具端口转发(常用于防火墙对3389的限制下)<ol>
+<li>A上监听：<code>lcx.exe -listen A_port(x) A_port(y)</code>,将监听的端口x转发到本地端口y。</li>
+<li>拿下权限的跳板B上转发：<code>lcx.exe -slave A_ip A_port(x) C_ip port_(z)</code>，将C的端口z转发到A的端口x上。</li>
+<li>此时A访问本机的端口y即访问C的端口z。</li>
+</ol>
+</li>
+</ul>
+<h4 id="4-3-2-内网穿透"><a href="#4-3-2-内网穿透" class="headerlink" title="4.3.2. 内网穿透"></a>4.3.2. 内网穿透</h4><ul>
+<li>代理（proxy）：网络代理，特殊的网络服务，允许一个网络终端通过这个服务与另外一个网络终端进行非直接的连接。</li>
+<li>代理类别：<ul>
+<li>http代理</li>
+<li>socks代理</li>
+<li>ftp代理</li>
+<li>telnet代理</li>
+<li>ssl代理</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>EarthWorm</p>
+<ul>
+<li><p>正向代理<br>跳板主机上没有任何防火墙策略限制端口或者允许端口x的流量</p>
+<ol>
+<li>在跳板机B上执行：<code>ew -s ssocksd -l port_x</code>,开启代理服务，任何连接代理的主机可以获取跳板机B的可访问资源。</li>
+<li>A上连接代理 <code>B_ip:port_x</code>（windows下Proxifier，SocksCap等代理连接工具，linux使用proxychains，<strong>但是proxychains不支持udp和icmp协议，使用namap时注意使用-Pn -sT</strong>）</li>
+</ol>
+</li>
+<li><p>反向代理</p>
+<ol>
+<li>在A上监听：<code>ew -s rcsocks -e port_x -l port_y</code>,监听端口x和y，攻击者A访问端口y,跳板访问端口x</li>
+<li>在跳板机B上反向连接：<code>ew -s rssocks -d ip_A -e port_x</code></li>
+<li>A使用代理连工具连接代理 <code>A_ip:port_y</code>（windows下Proxifier，SocksCap等代理连接工具，linux使用proxychains,<strong>但是proxychains不支持udp和icmp协议，使用namap时注意使用-Pn -sT</strong>）</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-4-日志清理"><a href="#4-4-日志清理" class="headerlink" title="4.4. 日志清理"></a>4.4. 日志清理</h3>
       
       <!-- reward -->
       
@@ -519,7 +564,7 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="http://i1.fuimg.com/712595/abad81f62059bd4c.png" alt="w&#39; Blog"></a>
+    <a href="/"><img src="http://ww1.sinaimg.cn/large/00725ImKgy1gcy2htxn9vj302t03ddg5.jpg" alt="w&#39; Blog"></a>
   </div>
   
   <ul class="nav nav-main">
@@ -599,7 +644,7 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 <script>
   try {
     var typed = new Typed("#subtitle", {
-      strings: ['面朝大海,春暖花开.', '春赏百花冬观雪,醒亦念卿,梦亦念卿.', '浮世三千,吾爱有三;日|月|卿;日为朝,月为暮,卿为朝朝暮暮.'],
+      strings: ['面朝大海,春暖花开.', '春赏百花冬观雪,醒亦念卿,梦亦念卿.', '浮世三千,吾爱有三;日、月、卿;日为朝,月为暮,卿为朝朝暮暮.'],
       startDelay: 0,
       typeSpeed: 200,
       loop: true,
