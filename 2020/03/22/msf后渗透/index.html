@@ -99,7 +99,9 @@
       
 
       
-      <h1 id="MSF后渗透"><a href="#MSF后渗透" class="headerlink" title="MSF后渗透"></a>MSF后渗透</h1><h2 id="一-获取meterpreter会话"><a href="#一-获取meterpreter会话" class="headerlink" title="一.获取meterpreter会话"></a>一.获取meterpreter会话</h2><p>meterpreter是msf的一个payload，目标执行后返回一个meterpreter会话，和shell会话类似，但是功能更强大，是执行后渗透的实施通道</p>
+      <h1 id="MSF后渗透"><a href="#MSF后渗透" class="headerlink" title="MSF后渗透"></a>MSF后渗透</h1><p><strong>操作应用场景：kali（192.168.10.129）拿下内网服务器（192.168.10.10，内网网段为10.10.10.0/24）的shell后的渗透操作</strong><br><img src="/pic/environment.png" alt="enviroment"></p>
+<hr>
+<h2 id="一-获取meterpreter会话"><a href="#一-获取meterpreter会话" class="headerlink" title="一.获取meterpreter会话"></a>一.获取meterpreter会话</h2><p>meterpreter是msf的一个payload，目标执行后返回一个meterpreter会话，和shell会话类似，但是功能更强大，是执行后渗透的实施通道</p>
 <h3 id="1-使用msfvenom生成payload"><a href="#1-使用msfvenom生成payload" class="headerlink" title="1.使用msfvenom生成payload"></a>1.使用msfvenom生成payload</h3><p><img src="/pic/msfvenom.png" alt="msfvenom"><br>参数说明：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-p 选择payload</span><br><span class="line">--list payloads列出可选payload（项目较多，使用grep匹配输出）</span><br><span class="line">-p payload --list-options 列出当前payload需要设置的选项</span><br><span class="line"></span><br><span class="line">-f 选择输出格式</span><br><span class="line">--list formats 列出格式选项</span><br><span class="line">-e 编码方式</span><br><span class="line">-i 编码次数</span><br><span class="line"></span><br><span class="line">-o 输出文件名</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
 
