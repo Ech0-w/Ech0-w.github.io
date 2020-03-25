@@ -142,7 +142,7 @@
 dns服务器查询`nslookup`</code></pre><h5 id="操作系统机软件信息"><a href="#操作系统机软件信息" class="headerlink" title="操作系统机软件信息"></a>操作系统机软件信息</h5><h6 id="操作系统和版本信息"><a href="#操作系统和版本信息" class="headerlink" title="操作系统和版本信息"></a>操作系统和版本信息</h6><ul>
 <li><code>systeminfo | findstr /B /C:&quot;OS Name&quot; /C &quot;OS Version&quot;</code></li>
 <li><code>systeminfo | findstr /B /C:&quot;OS 名称&quot; /C:&quot;OS 版本&quot;</code></li>
-<li>linux:<code>uname -a</code><h6 id="安装的软件及版本"><a href="#安装的软件及版本" class="headerlink" title="安装的软件及版本"></a>安装的软件及版本</h6></li>
+<li>linux:<code>uname -a</code> <code>cat /etc/issue</code><h6 id="安装的软件及版本"><a href="#安装的软件及版本" class="headerlink" title="安装的软件及版本"></a>安装的软件及版本</h6></li>
 <li><code>wmic product get name,version</code></li>
 <li><code>powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,version&quot;</code></li>
 <li>linux:<code>rpm -qa</code><h5 id="查询本机服务"><a href="#查询本机服务" class="headerlink" title="查询本机服务"></a>查询本机服务</h5></li>
