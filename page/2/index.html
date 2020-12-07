@@ -65,7 +65,7 @@
     
     
     
-    <article id="post-docker学习" class="article article-type-post" itemscope
+    <article id="post-护网" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -73,8 +73,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/%E5%AD%A6%E4%B9%A0/docker%E5%AD%A6%E4%B9%A0.html"
-    >docker学习</a
+  <a class="article-title" href="/%E5%B7%A5%E4%BD%9C/%E6%8A%A4%E7%BD%91.html"
+    >护网</a
   >
 </h2>
   
@@ -84,12 +84,12 @@
 
     
     <div class="article-meta">
-      <a href="/%E5%AD%A6%E4%B9%A0/docker%E5%AD%A6%E4%B9%A0.html" class="article-date">
-  <time datetime="2020-06-03T14:12:04.000Z" itemprop="datePublished">2020-06-03</time>
+      <a href="/%E5%B7%A5%E4%BD%9C/%E6%8A%A4%E7%BD%91.html" class="article-date">
+  <time datetime="2020-08-06T08:33:45.000Z" itemprop="datePublished">2020-08-06</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a>
   </div>
 
       
@@ -108,59 +108,322 @@
       
 
       
-      <h1 id="Docker-学习"><a href="#Docker-学习" class="headerlink" title="Docker 学习"></a>Docker 学习</h1><h2 id="一-docker常用命令"><a href="#一-docker常用命令" class="headerlink" title="一.docker常用命令"></a>一.docker常用命令</h2><p><img src="http://imag.k3rwin.cn//docker%E5%91%BD%E4%BB%A4%E5%9B%BE.jpg" alt="img"></p>
-<p><a href="https://docs.docker.com/engine/reference/run/" target="_blank" rel="noopener">docker官方帮助文档</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker command --help 获取命令帮助</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-Engine相关命令"><a href="#1-Engine相关命令" class="headerlink" title="1.Engine相关命令"></a>1.Engine相关命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看docker版本</span></span><br><span class="line">docker version</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示docker系统信息，包括镜像数和容器数</span></span><br><span class="line">docker info</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">从服务器获取实时事件,需要多个shell，筛选语法使用 --<span class="built_in">help</span></span></span><br><span class="line">docker events</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-Images相关命令"><a href="#2-Images相关命令" class="headerlink" title="2.Images相关命令"></a>2.Images相关命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 从仓库docker-hub中下载镜像</span></span><br><span class="line">docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将镜像上传至仓库</span></span><br><span class="line">docker push [OPTIONS] NAME[:TAG]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 列举本地的镜像</span></span><br><span class="line">docker images [OPTIONS] [REPOSITORY[:TAG]]</span><br><span class="line">Options:</span><br><span class="line">  -a, --all             查看所有</span><br><span class="line">      --digests         查看签名摘要</span><br><span class="line">  -f, --filter filter   Filter output based on conditions provided</span><br><span class="line">      --format string   Pretty-print images using a Go template</span><br><span class="line">      --no-trunc        Don't truncate output</span><br><span class="line">  -q, --quiet           只显示镜像ID信息</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除镜像</span></span><br><span class="line">docker rmi [OPTIONS] IMAGE [IMAGE...]</span><br><span class="line">Options:</span><br><span class="line">  -f, --force      删除正在运行的容器的母镜像需要强制删除，也可以停止容器后再删除</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 给镜像打标签</span></span><br><span class="line">docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 列出镜像的详细信息，元数据</span></span><br><span class="line">docker inspect [OPTIONS] NAME|ID [NAME|ID...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 列出镜像的构建历史</span></span><br><span class="line">docker history [OPTIONS] IMAGE</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将一个镜像导出为tar文件，比较大</span></span><br><span class="line">docker save [OPTIONS] IMAGE [IMAGE...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将一个容器导出为tar文件，比镜像文件小，容器文件会丢失所有元数据和历史记录，即容器快照</span></span><br><span class="line">docker export [OPTIONS] CONTAINER</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将tar文件加载为镜像，可以指定镜像的名字，但是会丢失相关元数据和历史数据，与<span class="built_in">export</span>命令配合</span></span><br><span class="line">docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将tar文件加载为镜像，与save命令配合</span></span><br><span class="line">docker load [OPTIONS]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将容器保存为一个新的镜像</span></span><br><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从镜像创建一个容器，该容器状态为stop</span></span><br><span class="line">docker create [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">从镜像创建一个容器并将该容器启动</span></span><br><span class="line">docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 常用选项：</span></span><br><span class="line">	-it 交互式运行</span><br><span class="line">	-p 本地port:容器port 	端口映射 </span><br><span class="line">	-P 容器port		  	 本地随机映射</span><br><span class="line">	-d 后台运行</span><br><span class="line">	--name 指定容器名</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查自镜像运行之后，容器里文件结构的更改</span></span><br><span class="line">docker diff CONTAINER</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 搜索镜像，与在docker hub里搜索效果一样</span></span><br><span class="line">docker search [OPTIONS] TERM</span><br><span class="line">Options:</span><br><span class="line">  -f, --filter filter   Filter output based on conditions provided</span><br><span class="line">      --format string   Pretty-print search using a Go template</span><br><span class="line">      --limit int       Max number of search results (default 25)</span><br><span class="line">      --no-trunc        Don't truncate output</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 搜索stars&gt;=1000的 mysql镜像</span></span><br><span class="line">docker search mysql -f STARS=1000</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-Container相关命令"><a href="#3-Container相关命令" class="headerlink" title="3.Container相关命令"></a>3.Container相关命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看系统中正在运行的容器</span></span><br><span class="line">docker ps</span><br><span class="line">常用选项 -a 显示所有容器（包括暂停的） -q 只显示容器id</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动容器，后面跟id或者name</span></span><br><span class="line">docker start [OPTIONS] CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 直接杀死容器，从running状态到stop</span></span><br><span class="line">docker kill [OPTIONS] CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止容器，从running到stop，需要进行保护性动作，比<span class="built_in">kill</span>慢但安全</span></span><br><span class="line">docker stop [OPTIONS] CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 暂停容器中的所有进程</span></span><br><span class="line">docker pause CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 恢复容器中的所有进程</span></span><br><span class="line">docker unpause CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将容器保存为一个新的镜像</span></span><br><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将一个容器导出为tar文件，比镜像文件小，容器文件会丢失所有元数据和历史记录，即容器快照</span></span><br><span class="line">docker export [OPTIONS] CONTAINER</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 连接到正在运行的容器，直接占用原进程</span></span><br><span class="line">docker attach [OPTIONS] CONTAINER</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在运行的容器中执行命令，另起一个进程，退出不影响原docker进程</span></span><br><span class="line">docker exec [OPTIONS] CONTAINER COMMAND [ARG...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 列出指定容器的端口映射</span></span><br><span class="line">docker port CONTAINER [PRIVATE_PORT[/PROTO]]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看容器中运行的进程</span></span><br><span class="line">docker top CONTAINER [ps OPTIONS]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除容器</span></span><br><span class="line">docker rm [OPTIONS] CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取容器的日志信息</span></span><br><span class="line">docker logs [OPTIONS] CONTAINER</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在容器和主机进行文件拷贝</span></span><br><span class="line">docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-	# docker cp 容器id:要拷贝的容器文件 拷贝到主机中的路径</span><br><span class="line">docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH	# docker cp 主机中需要拷贝到容器里的文件 容器id:要拷贝到容器中的位置</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="二-DockerFile指令"><a href="#二-DockerFile指令" class="headerlink" title="二.DockerFile指令"></a>二.DockerFile指令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> DockerHub中99%的镜像都是从基础镜像scratch过来的</span></span><br><span class="line">FROM			# 基础镜像	</span><br><span class="line">MAINTAINER		# 镜像作者，姓名+邮箱</span><br><span class="line">RUN				# 镜像构建时需要运行的命令</span><br><span class="line">ADD				# 加入文件（tomcat压缩包等），会自动解压</span><br><span class="line">WORKDIR			# 镜像的工作目录</span><br><span class="line">VOLUME			# 挂载的目录</span><br><span class="line">EXPOST			# 指定暴露端口</span><br><span class="line">CMD				# 指定容器运行时要运行的命令，只有最后一个会生效，可被替换</span><br><span class="line">ENTRYPOINT		# 指定容器运行时要运行的命令，可以追加</span><br><span class="line">ONBUILD			# 当构建一个被继承DockFile时就会运行ONBUILD的指令，触发指令</span><br><span class="line">COPY			# 类似ADD，将文件拷贝到镜像中</span><br><span class="line">ENV				# 构建的时候设置环境变量</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://imag.k3rwin.cn/image-20200628101652011.png" alt="image-20200628101652011"></p>
-<h3 id="centos-的dockerfile"><a href="#centos-的dockerfile" class="headerlink" title="centos 的dockerfile"></a>centos 的dockerfile</h3><p><img src="http://imag.k3rwin.cn/image-20200628102013358.png" alt="image-20200628102013358"></p>
-<h3 id="编写简单的dockerfile，定制dockerimages"><a href="#编写简单的dockerfile，定制dockerimages" class="headerlink" title="编写简单的dockerfile，定制dockerimages"></a>编写简单的dockerfile，定制dockerimages</h3><ol>
-<li><p>编写dockerfile</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">MAINTAINER k3rwin&lt;k3rw1n@qq.com&gt;</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install python38</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">CMD echo $MYPATH</span><br><span class="line">CMD echo "-----ok------!"</span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure>
+      <h1 id="护网流程-保障前"><a href="#护网流程-保障前" class="headerlink" title="护网流程-保障前"></a>护网流程-保障前</h1><h2 id="一-前期工作准备阶段"><a href="#一-前期工作准备阶段" class="headerlink" title="一.前期工作准备阶段"></a>一.前期工作准备阶段</h2><h3 id="1-建立护网组织"><a href="#1-建立护网组织" class="headerlink" title="1.建立护网组织"></a>1.建立护网组织</h3><p><strong>作为主导方时必须做的工作</strong></p>
+<ul>
+<li>护网领导小组（组长、副组长、成员）</li>
+<li>专家顾问组</li>
+<li>安全评估组</li>
+<li>开发运维厂商支撑组</li>
+<li>资源协调组</li>
+<li>业务保障组</li>
+<li>运维支撑组</li>
+<li>…..</li>
+</ul>
+<h3 id="2-现状调研与需求分析"><a href="#2-现状调研与需求分析" class="headerlink" title="2.现状调研与需求分析"></a>2.现状调研与需求分析</h3><ul>
+<li>安全组织结构调研</li>
+<li>防护对象调研</li>
+<li>防护策略调研</li>
+<li>安全风险分析</li>
+</ul>
+<h3 id="3-方案制定与计划安排"><a href="#3-方案制定与计划安排" class="headerlink" title="3.方案制定与计划安排"></a>3.方案制定与计划安排</h3><ul>
+<li>保障方案制定与评审</li>
+<li>保障计划制定</li>
+</ul>
+<h3 id="4-入场启动与工作培训"><a href="#4-入场启动与工作培训" class="headerlink" title="4.入场启动与工作培训"></a>4.入场启动与工作培训</h3><ul>
+<li>（客户）组织项目启动会,输出《项目启动会PPT》材料</li>
+<li>人员入场审查、人员进出安排，包括签署<strong>保密协议</strong>、保障工作责任书</li>
+<li>保障能力培训（单位安排全员安全意识培训）</li>
+<li>其他保障事项（后勤保障）</li>
+</ul>
+<h2 id="二-基础梳理阶段"><a href="#二-基础梳理阶段" class="headerlink" title="二.基础梳理阶段"></a>二.基础梳理阶段</h2><h3 id="1-信息资产"><a href="#1-信息资产" class="headerlink" title="1.信息资产"></a>1.信息资产</h3><h4 id="梳理内容"><a href="#梳理内容" class="headerlink" title="梳理内容"></a>梳理内容</h4><ul>
+<li>梳理登记在册的资产</li>
+<li>通过扫描、手工探测</li>
+<li>重点资产专项登记</li>
+<li>梳理互联网资产暴露面</li>
+</ul>
+<h4 id="梳理重点"><a href="#梳理重点" class="headerlink" title="梳理重点"></a>梳理重点</h4><ul>
+<li><p>按资产所属维度梳理</p>
 </li>
-<li><p>docker build 命令生成images</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> docker build 最后的 . 号，其实是在指定镜像构建过程中的上下文环境的目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -f [dockerfile文件] -t [指定images名和版本标签]</span></span><br><span class="line">docker build -f dockerfile_centos -t mycentos:1 .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 成功后会有以下提示信息</span></span><br><span class="line">Successfully built 08ee09b416a3</span><br><span class="line">Successfully tagged mycentos:1</span><br></pre></td></tr></table></figure>
-
-<p>相比于官方的centos，增加了python3命令以及vim命令，并且当前工作目录是在/usr/local下的</p>
-<p><img src="http://imag.k3rwin.cn/image-20200628104500648.png" alt="image-20200628104500648"></p>
-<p><img src="http://imag.k3rwin.cn/image-20200628104949709.png" alt="image-20200628104949709"></p>
+<li><p>按资产属性梳理</p>
 </li>
-<li><p>通过docker history命令查看镜像构建过程，可以研究其他镜像是如何做的</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker history mycentos:1</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://imag.k3rwin.cn/image-20200628105134556.png" alt="image-20200628105134556"></p>
+<li><p>不要忽视的资产</p>
+<ul>
+<li><p>公有云资产</p>
 </li>
-</ol>
-<h3 id="CMD指令和ENTRYPOINT区别"><a href="#CMD指令和ENTRYPOINT区别" class="headerlink" title="CMD指令和ENTRYPOINT区别"></a>CMD指令和ENTRYPOINT区别</h3><ol>
-<li><p>CMD指令测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> CMD 的 dockerfile文件内容</span></span><br><span class="line">FROM centos</span><br><span class="line"></span><br><span class="line">CMD ["ls","-a"]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 编译镜像并运行测试</span></span><br><span class="line"></span><br><span class="line">root@kerwin:~# docker build -f cmdtest -t cmdtest .</span><br><span class="line">Sending build context to Docker daemon  41.19MB</span><br><span class="line">Step 1/2 : FROM centos</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 831691599b88</span></span><br><span class="line">Step 2/2 : CMD ["ls","-a"]</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> Running <span class="keyword">in</span> 9adb19cb5a5e</span></span><br><span class="line">Removing intermediate container 9adb19cb5a5e</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> c0f7b5e1d5cc</span></span><br><span class="line">Successfully built c0f7b5e1d5cc</span><br><span class="line">Successfully tagged cmdtest:latest</span><br><span class="line">root@kerwin:~# docker run cmdtest</span><br><span class="line">.</span><br><span class="line">..</span><br><span class="line">.dockerenv</span><br><span class="line">bin</span><br><span class="line">dev</span><br><span class="line">etc</span><br><span class="line">home</span><br><span class="line">lib</span><br><span class="line">lib64</span><br><span class="line">lost+found</span><br><span class="line">media</span><br><span class="line">mnt</span><br><span class="line">opt</span><br><span class="line">proc</span><br><span class="line">root</span><br><span class="line">run</span><br><span class="line">sbin</span><br><span class="line">srv</span><br><span class="line">sys</span><br><span class="line">tmp</span><br><span class="line">usr</span><br><span class="line">var</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 想查看ls -al命令直接追加 -l参数会出错</span></span><br><span class="line">root@kerwin:~# docker run cmdtest -l</span><br><span class="line">docker: Error response from daemon: OCI runtime create failed: container_linux.go:349: starting container process caused "exec: \"-l\": executable file not found in $PATH": unknown.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 需要使用完整的命令替换</span></span><br><span class="line">root@kerwin:~# docker run cmdtest ls -al</span><br><span class="line">total 56</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jun 28 03:05 .</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jun 28 03:05 ..</span><br><span class="line">-rwxr-xr-x   1 root root    0 Jun 28 03:05 .dockerenv</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 bin -&gt; usr/bin</span><br><span class="line">drwxr-xr-x   5 root root  340 Jun 28 03:05 dev</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jun 28 03:05 etc</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 home</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 lib -&gt; usr/lib</span><br><span class="line">lrwxrwxrwx   1 root root    9 May 11  2019 lib64 -&gt; usr/lib64</span><br><span class="line">drwx------   2 root root 4096 Jun 11 02:35 lost+found</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 media</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 mnt</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 opt</span><br><span class="line">dr-xr-xr-x 141 root root    0 Jun 28 03:05 proc</span><br><span class="line">dr-xr-x---   2 root root 4096 Jun 11 02:35 root</span><br><span class="line">drwxr-xr-x  11 root root 4096 Jun 11 02:35 run</span><br><span class="line">lrwxrwxrwx   1 root root    8 May 11  2019 sbin -&gt; usr/sbin</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 srv</span><br><span class="line">dr-xr-xr-x  13 root root    0 Jun 17 15:30 sys</span><br><span class="line">drwxrwxrwt   7 root root 4096 Jun 11 02:35 tmp</span><br><span class="line">drwxr-xr-x  12 root root 4096 Jun 11 02:35 usr</span><br><span class="line">drwxr-xr-x  20 root root 4096 Jun 11 02:35 var</span><br></pre></td></tr></table></figure>
-
-
-
+<li><p><strong>开发商/外包商/供应商的资产</strong>（渗透测试时也要重点关注）</p>
 </li>
-</ol>
-<ol start="2">
-<li><p>ENTRYPOINT指令测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> dockerfile内容</span></span><br><span class="line">FROM centos</span><br><span class="line"></span><br><span class="line">ENTRYPOINT ["ls","-a"]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">root@kerwin:~# docker build -f entrypoint -t entrypoint .</span><br><span class="line">Sending build context to Docker daemon  41.19MB</span><br><span class="line">Step 1/2 : FROM centos</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 831691599b88</span></span><br><span class="line">Step 2/2 : ENTRYPOINT ["ls","-a"]</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 69fea7e8233e</span></span><br><span class="line">Successfully built 69fea7e8233e</span><br><span class="line">Successfully tagged entrypoint:latest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以直接追加命令，直接拼接在ENTRYPOINT指令后面</span></span><br><span class="line">root@kerwin:~# docker run entrypoint -l</span><br><span class="line">total 56</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jun 28 03:10 .</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jun 28 03:10 ..</span><br><span class="line">-rwxr-xr-x   1 root root    0 Jun 28 03:10 .dockerenv</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 bin -&gt; usr/bin</span><br><span class="line">drwxr-xr-x   5 root root  340 Jun 28 03:10 dev</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jun 28 03:10 etc</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 home</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 lib -&gt; usr/lib</span><br><span class="line">lrwxrwxrwx   1 root root    9 May 11  2019 lib64 -&gt; usr/lib64</span><br><span class="line">drwx------   2 root root 4096 Jun 11 02:35 lost+found</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 media</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 mnt</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 opt</span><br><span class="line">dr-xr-xr-x 140 root root    0 Jun 28 03:10 proc</span><br><span class="line">dr-xr-x---   2 root root 4096 Jun 11 02:35 root</span><br><span class="line">drwxr-xr-x  11 root root 4096 Jun 11 02:35 run</span><br><span class="line">lrwxrwxrwx   1 root root    8 May 11  2019 sbin -&gt; usr/sbin</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 srv</span><br><span class="line">dr-xr-xr-x  13 root root    0 Jun 17 15:30 sys</span><br><span class="line">drwxrwxrwt   7 root root 4096 Jun 11 02:35 tmp</span><br><span class="line">drwxr-xr-x  12 root root 4096 Jun 11 02:35 usr</span><br><span class="line">drwxr-xr-x  20 root root 4096 Jun 11 02:35 var</span><br></pre></td></tr></table></figure>
-
-
-
+<li><p>第三方运维商/厂商以前集成实施材料要求整理或者统一离线存放/各自排查私有云或者公有云盘</p>
 </li>
-</ol>
+</ul>
+</li>
+<li><p>最受攻击者欢迎的文档信息</p>
+<ul>
+<li>使用手册：VPN系统、OA系统、邮箱等系统的使用手册</li>
+<li>安装手册：可能存在应用默认口令、硬件设备的内外网地址</li>
+<li>交付文档：可能包含了应用配置信息、网络拓扑、网络的配置信息</li>
+</ul>
+<hr>
+</li>
+</ul>
+<h3 id="2-访问策略"><a href="#2-访问策略" class="headerlink" title="2.访问策略"></a>2.访问策略</h3><h4 id="梳理内容-1"><a href="#梳理内容-1" class="headerlink" title="梳理内容"></a>梳理内容</h4><ul>
+<li>梳理业务流以及互联网和其他网络边界访问控制策略，明确系统上线网络边界（含互联网和其他边界访问端口和访问控制策略）</li>
+<li>梳理重点资产访问源地址、访问方式、与外部系统的接口等业务访问策略</li>
+<li>梳理无线网络访问策略，包括访问源地址、目标地址、访问方式、网络接入身份认证等业务访问策略</li>
+<li>梳理重要资产自身<strong>远程维护访问策略</strong></li>
+<li>梳理已授权接入网络的终端IP、MAC地址，对新接入的终端身份进行认证</li>
+</ul>
+<h4 id="梳理重点-1"><a href="#梳理重点-1" class="headerlink" title="梳理重点"></a>梳理重点</h4><ul>
+<li>梳理靶心系统业务通信白名单，分析会话信息</li>
+<li>梳理下级单位到对应服务器的会话</li>
+<li>梳理服务器主动发起的会话（横向）</li>
+</ul>
+<h3 id="3-互联网暴露面梳理"><a href="#3-互联网暴露面梳理" class="headerlink" title="3.互联网暴露面梳理"></a>3.互联网暴露面梳理</h3><ul>
+<li><p>敏感资产排查，模拟攻击者，搜索下列信息：</p>
+<ul>
+<li>未严格按照上线流程等级的非法资产排查</li>
+<li>容易忽视的公有云资产、开发商/外包商/供应商的资产</li>
+<li>代码托管平台，Github/Bitbucket/Gitlib/Gitee等</li>
+<li>招投标网站，自建招投标网站、第三方招投标网站等</li>
+</ul>
+</li>
+<li><p>缩小暴露面</p>
+<ul>
+<li>不用的功能，该下的下，该停的停，能限制访问的范围的限制访问</li>
+<li>在用的，搞清楚功能，双流（数据流和运维流）谁在用，有没有风险，能否一键处置</li>
+</ul>
+</li>
+<li><p>资产上报责任到人</p>
+<ul>
+<li>要求管理业务系统人员务必上报登记所有资产</li>
+<li>如未上报相应资产导致杯攻击者利用后果自负</li>
+</ul>
+<hr>
+</li>
+</ul>
+<h3 id="4-网络架构"><a href="#4-网络架构" class="headerlink" title="4.网络架构"></a>4.网络架构</h3><h4 id="梳理内容-2"><a href="#梳理内容-2" class="headerlink" title="梳理内容"></a>梳理内容</h4><ul>
+<li>通过网络安全评估，梳理网络边界防护、区域划分、区域访问控制、入侵防御、违规内/外联管理、web防护等</li>
+<li>分析网络业务，评估网络边界隔离措施有效性和风险点；重点评估横跨双网网络和业务</li>
+<li>梳理反垃圾邮件、钓鱼邮件平台和防护策略</li>
+</ul>
+<h4 id="梳理重点-2"><a href="#梳理重点-2" class="headerlink" title="梳理重点"></a>梳理重点</h4><ul>
+<li><p>访问控制策略原则</p>
+<ul>
+<li>明细允许、默认拒绝、例外处置（白名单）</li>
+<li>高危端口屏蔽</li>
+<li>NAT策略是否能够一一对应（溯源）</li>
+</ul>
+</li>
+<li><p>从内网去互联网的访问控制</p>
+<ul>
+<li>办公终端：除个别协议无法限制目的ip外，其余协议全部全部限制</li>
+<li>办公服务器：特殊访问需求开通，默认拒绝</li>
+<li>生产网：生产网终端禁止上互联网</li>
+</ul>
+</li>
+<li><p>互联网访问内网</p>
+<ul>
+<li>对互联网提供的服务的服务器必须在DMZ区域，和内网隔离</li>
+</ul>
+</li>
+<li><p>重要系统的访问控制策略</p>
+<ul>
+<li>基础设施如AD、邮件系统的访问控制。</li>
+<li>ACL基于端口级的访问控制</li>
+<li>终端安全管控、自动化运维系统等集中控制系统后台登录限制访问来源</li>
+</ul>
+<hr>
+</li>
+</ul>
+<h3 id="5-安全配置梳理"><a href="#5-安全配置梳理" class="headerlink" title="5.安全配置梳理"></a>5.安全配置梳理</h3><h4 id="网络（可以让客户做排查）"><a href="#网络（可以让客户做排查）" class="headerlink" title="网络（可以让客户做排查）"></a>网络（可以让客户做排查）</h4><ul>
+<li>VPN、堡垒机等是否启用双因子认证</li>
+<li>在网所有网络及安全设备等口令变更（不得让第三方人知道）/指定人员知道</li>
+<li>排查无法进行多重验证的有暴力破解嫌疑的设备及资产（登录3次失败锁定/结合验证码等）</li>
+<li>对网络设备管理员远程登录地址进行限制</li>
+<li>是否通过双因子认证登录</li>
+<li>网络设备是否采用口令高强度措施</li>
+<li>是否配置设备登录失败次数</li>
+<li>设备是否启用了防窃听措施，如采用SSH或HTTPS</li>
+</ul>
+<h4 id="主机"><a href="#主机" class="headerlink" title="主机"></a>主机</h4><ul>
+<li><strong>域控服务器</strong></li>
+<li>高价值终端</li>
+</ul>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><ul>
+<li>优先排查集中身份认证系统，终端管理系统</li>
+<li>测试环境的测试系统未及时打补丁、弱密码，开发测试区停用/其他外联区停用</li>
+<li>关注护网期间线上开户业务</li>
+<li>优先排查如邮件系统，知识分享平台，OA系统，工单系统；这些系统有内置高权限账号，或可以帮助攻击者隐匿痕迹</li>
+<li>供应商本地远程维护问题</li>
+<li>供应商测试系统</li>
+<li>供应商内部SVN、Git</li>
+</ul>
+<hr>
+<h3 id="6-资产漏洞梳理"><a href="#6-资产漏洞梳理" class="headerlink" title="6.资产漏洞梳理"></a>6.资产漏洞梳理</h3><ul>
+<li><p>扫描资产安全漏洞（普通资产），提供漏洞扫描方案、授权；对网络设备、安全设备、主机、数据库、中间件以及摄像头、其他入网设备资产等进行漏洞扫描</p>
+</li>
+<li><p>重点资产渗透测试，包括提供渗透测试方案、授权；从互联网、内网对目标系统进行渗透测试，主要排查手机银行、网上银行等核心系统、排查边缘资产是否存在高危漏洞</p>
+<ul>
+<li>手机银行、网上银行、卡中心、商户系统</li>
+<li>第三方支付口，第三方接口</li>
+<li>外包厂商开发的系统</li>
+<li>相关开源系统 </li>
+</ul>
+<hr>
+</li>
+</ul>
+<h3 id="7-专项梳理"><a href="#7-专项梳理" class="headerlink" title="7.专项梳理"></a>7.专项梳理</h3><ul>
+<li><p>安全专项检查</p>
+<ul>
+<li>违规内/外联</li>
+<li>安装网络版杀毒软件</li>
+<li>服务器是否存在web木马、后门</li>
+<li>弱口令/同一口令/共享口令/有明显规律口令</li>
+<li>近期爆发的高危漏洞</li>
+</ul>
+</li>
+<li><p>主机敏感信息核查</p>
+<ul>
+<li>检查服务器上是否有随意存放的敏感配置文件（账号、系统口令一览表…）</li>
+</ul>
+<hr>
+</li>
+</ul>
+<h3 id="8-社工风险排查"><a href="#8-社工风险排查" class="headerlink" title="8.社工风险排查"></a>8.社工风险排查</h3><ul>
+<li>安全意识风险<ul>
+<li>接触式攻击（冒充上门维护）</li>
+<li>钓鱼邮件</li>
+<li>电话冒充索要资料</li>
+<li>申请加群</li>
+<li>钓鱼wifi/wifi破解等</li>
+</ul>
+</li>
+<li>风险排查<ul>
+<li>邮件系统专人排查</li>
+<li>安全意识培训</li>
+</ul>
+</li>
+</ul>
+<h2 id="三-防护建设阶段"><a href="#三-防护建设阶段" class="headerlink" title="三.防护建设阶段"></a>三.防护建设阶段</h2><h3 id="1-风险整改加固"><a href="#1-风险整改加固" class="headerlink" title="1.风险整改加固"></a>1.风险整改加固</h3><ul>
+<li><p>资产访问控制策略加固（开启默认阻断）</p>
+</li>
+<li><p>互联网暴露面控制</p>
+</li>
+<li><p>互联网敏感信息控制</p>
+</li>
+<li><p>资产漏洞修复，短期无法修复的考虑风险降低类措施或者下线</p>
+</li>
+<li><p>设备自身安全防护配置加固</p>
+</li>
+</ul>
+<h3 id="2-安全管理提升"><a href="#2-安全管理提升" class="headerlink" title="2.安全管理提升"></a>2.安全管理提升</h3><ul>
+<li>安全管理整体提升，包括安全保障相关管理制度和流程，组织人员安全培训，下发安全意识手册资料等；加强人员身份识别</li>
+<li>加强各级场所管理</li>
+</ul>
+<h3 id="3-网络安全增强"><a href="#3-网络安全增强" class="headerlink" title="3.网络安全增强"></a>3.网络安全增强</h3><ul>
+<li>网络安全增强设备部署，确认部署方案，部署位置，部署资源需求，部署时间，测试要求</li>
+<li>部署安全增强设备，包括应急处置装置、态势感知、全流量分析探针、安全检测产品、防火墙、入侵检测、WAF、网络版杀毒软件、蜜罐、HIDS、主机入侵防护软件等设备的商家、策略优化调整</li>
+<li>检测评估对业务的影响，对部署效果进行验证</li>
+</ul>
+<p><img src="http://imag.k3rwin.cn/image-20200806105036602.png" alt="image-20200806105036602"></p>
+<h3 id="4-其他保障措施"><a href="#4-其他保障措施" class="headerlink" title="4.其他保障措施"></a>4.其他保障措施</h3><ul>
+<li><p>对目标系统相关资产进行网络隔离（按需），减少同网段或跨网攻击</p>
+</li>
+<li><p>非必需设备/系统建议关停，高危功能模块切无法整改的停止使用</p>
+</li>
+<li><p>关注护网期间上线开户业务，未经评估和授权不得上线</p>
+</li>
+<li><p>制定保障期间工作规范，制定保障期间防护工作规范</p>
+</li>
+<li><p>专用电脑、专用U盘、专人管理</p>
+</li>
+<li><p>部署监控指挥中心作战室，容纳全部防护队伍，配置白板，便于梳理攻击路径</p>
+</li>
+<li><p>一日三餐管理、基础物资准备、人员的统一管理</p>
+</li>
+</ul>
+<h3 id="5-保障工作规范"><a href="#5-保障工作规范" class="headerlink" title="5.保障工作规范"></a>5.保障工作规范</h3><ul>
+<li>模板</li>
+</ul>
+<h3 id="6-演练平台和标准解读"><a href="#6-演练平台和标准解读" class="headerlink" title="6.演练平台和标准解读"></a>6.演练平台和标准解读</h3><ul>
+<li>专家组进行</li>
+</ul>
+<h3 id="7-模拟攻防演练"><a href="#7-模拟攻防演练" class="headerlink" title="7.模拟攻防演练"></a>7.模拟攻防演练</h3><ul>
+<li>完善应急预案，并制定攻防演练工作方案</li>
+<li>准备应急演练环境、人力，开展应预案培训</li>
+<li>开展不同攻击事件的应急演练，模拟攻方对目标系统进行攻击测试，各防守团队按照应急预案进行操作，次数建议至少2次以上</li>
+<li>应急演练至少提前一周开始</li>
+<li>应急演练总结，总结每次演练发现的问题，提出下一步工作方案</li>
+<li>对安全监测，应急处置，分析溯源，事件上报过程中出现的技术问题加以解决，对防护不足的地方加以补充；对保障过程中出现的配合不到位，流程不清楚，职责不清晰的问题作出相应修改和完善</li>
+</ul>
+<h4 id="建立流程"><a href="#建立流程" class="headerlink" title="建立流程"></a>建立流程</h4><h4 id="编写预案"><a href="#编写预案" class="headerlink" title="编写预案"></a>编写预案</h4><h4 id="进行模拟演练"><a href="#进行模拟演练" class="headerlink" title="进行模拟演练"></a>进行模拟演练</h4><ul>
+<li>从设备入手</li>
+<li>从人员入手</li>
+</ul>
+<hr>
+<h1 id="护网流程-保障中"><a href="#护网流程-保障中" class="headerlink" title="护网流程-保障中"></a>护网流程-保障中</h1><h2 id="一-安全监测"><a href="#一-安全监测" class="headerlink" title="一.安全监测"></a>一.安全监测</h2><h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><ul>
+<li>各区域检测平台</li>
+<li>网络设备</li>
+<li>主机</li>
+<li>业务系统</li>
+</ul>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
+<li>网络入侵事件监测<ul>
+<li>通过各类安全设备监测、分析攻击事件并溯源源地址，同步研判组和处置组做进一步处置</li>
+</ul>
+</li>
+<li>监测VPN账号可疑行为监测<ul>
+<li>分析攻击事件并溯源源地址，同步研判组和处置组做进一步处置</li>
+</ul>
+</li>
+<li>主机防病毒/木马监测<ul>
+<li>通过杀毒软件实时监测和处理</li>
+</ul>
+</li>
+<li>主机防入侵监测<ul>
+<li>通过主机防入侵软件（如安全狗、G101等），监测核心文件的修改、账号添加、进场添加等异常行为，监测web目录木马，手工查杀（可配合D盾等常用免费软件）</li>
+</ul>
+</li>
+<li>失陷主机流量监测<ul>
+<li>通过态势感知查看主机异常通信情况，通过蜜罐平台（如蜜罐系统）监测</li>
+</ul>
+</li>
+</ul>
+<h2 id="二-分析研判"><a href="#二-分析研判" class="headerlink" title="二.分析研判"></a>二.分析研判</h2><ul>
+<li>分析安全事件关联源地址、端口、目的地址、端口、通信协议，通过资产表核对是否正常业务通信，如非授权地址，通知封禁处置</li>
+<li>分析安全事件关联异常行为</li>
+<li>分析研判事件关联漏洞、配置或管理等脆弱点，并进行验证，通知处置组处置</li>
+</ul>
+<h2 id="三-应急处置"><a href="#三-应急处置" class="headerlink" title="三.应急处置"></a>三.应急处置</h2><ul>
+<li><p>攻击地址封禁</p>
+</li>
+<li><p>可疑行为控制</p>
+</li>
+<li><p>事件通报整改，及时发下整改通知，并对存在漏洞的系统、设备或源地址进行访问限制（断网、下架、关闭）</p>
+</li>
+<li><p>重要信息同步</p>
+</li>
+</ul>
+<h2 id="四-事件上报"><a href="#四-事件上报" class="headerlink" title="四.事件上报"></a>四.事件上报</h2><ul>
+<li>攻击事件详细记录，并保留证据</li>
+<li>汇报单次疑似攻击成果事件处置结果报告，每周汇报当周总结报告</li>
+</ul>
+<hr>
+<h1 id="护网流程-保障后"><a href="#护网流程-保障后" class="headerlink" title="护网流程-保障后"></a>护网流程-保障后</h1><h2 id="一-收尾保障工作"><a href="#一-收尾保障工作" class="headerlink" title="一.收尾保障工作"></a>一.收尾保障工作</h2><ul>
+<li>常态化安全监测手段</li>
+<li>调整安全防护策略，开展安全设备下线风险评估，对非必须设备进行下线处理</li>
+<li>收集本次HW行动产生的多种问题，做到相应的问题管理<ul>
+<li>同样问题不再重复</li>
+<li>同类问题尽量避免</li>
+<li>优先解决历史已暴露问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="二-护网工作总结"><a href="#二-护网工作总结" class="headerlink" title="二.护网工作总结"></a>二.护网工作总结</h2><ul>
+<li>复盘，编制保障工作报告，包括准备需要对公安部上报的总结报告、防护技战法报告；对内的保障工作报告、整体工作总结汇报材料，含改进建议</li>
+<li>其他总结，包括考勤记录，投入人员等</li>
+<li>防护薄弱点和改进措施总结，安全团队、协作团队、厂商和第三方安全团队不好推动的工作，此时可以提出来</li>
+<li>应急处置薄弱点和改进措施，落实到人、计划和资源中</li>
+</ul>
 
       
       <!-- reward -->
@@ -173,7 +436,7 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C/" rel="tag">工作</a></li></ul>
 
 
     </footer>
@@ -196,7 +459,7 @@
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
   </nav>
   
 </section>

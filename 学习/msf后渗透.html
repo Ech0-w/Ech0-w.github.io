@@ -114,7 +114,7 @@
 <h2 id="二-进程迁移"><a href="#二-进程迁移" class="headerlink" title="二.进程迁移"></a>二.进程迁移</h2><h3 id="1-手动迁移"><a href="#1-手动迁移" class="headerlink" title="1.手动迁移"></a>1.手动迁移</h3><h4 id="获取当前进程信息-ps"><a href="#获取当前进程信息-ps" class="headerlink" title="获取当前进程信息:ps"></a>获取当前进程信息:<code>ps</code></h4><h4 id="进程迁移-migrate-lt-稳定的进程号pid-gt"><a href="#进程迁移-migrate-lt-稳定的进程号pid-gt" class="headerlink" title="进程迁移:migrate &lt;稳定的进程号pid&gt;"></a>进程迁移:<code>migrate &lt;稳定的进程号pid&gt;</code></h4><p><img src="http://imag.k3rwin.cn//migrate.png" alt="migrate"></p>
 <h3 id="2-使用后渗透模块post-windows-manage-migrate自动迁移"><a href="#2-使用后渗透模块post-windows-manage-migrate自动迁移" class="headerlink" title="2.使用后渗透模块post/windows/manage/migrate自动迁移"></a>2.使用后渗透模块post/windows/manage/migrate自动迁移</h3><p><code>run post/windows/manage/migrate</code></p>
 <p><img src="http://imag.k3rwin.cn//migrate2.png" alt="migrate2"></p>
-<h2 id="三-提权"><a href="#三-提权" class="headerlink" title="三.提权"></a>三.提权</h2><p>查看当前权限<code>getuid</code><br>若未系统权限则绕过此步</p>
+<h2 id="三-提权"><a href="#三-提权" class="headerlink" title="三.提权"></a>三.提权</h2><p>查看当前权限<code>getuid</code><br>若为系统权限则绕过此步</p>
 <h3 id="1-getsystem"><a href="#1-getsystem" class="headerlink" title="1.getsystem"></a>1.getsystem</h3><p><img src="http://imag.k3rwin.cn//getsystem.png" alt="getsystem"></p>
 <p>默认选项 0 使用三种技术进行提权<br>                                    <img src="http://imag.k3rwin.cn//get.png" alt="get"></p>
 <h3 id="2-绕过UAC"><a href="#2-绕过UAC" class="headerlink" title="2.绕过UAC"></a>2.绕过UAC</h3><ul>

